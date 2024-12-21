@@ -13,6 +13,7 @@ const forget = require("./views/forget.js");
 
 
 
+
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'))
 app.set("view engine","ejs");
