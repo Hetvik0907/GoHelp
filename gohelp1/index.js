@@ -136,6 +136,9 @@ passport.deserializeUser(User.deserializeUser());
 app.post("/employeelogin",passport.authenticate("local",{failureRedirect:'/employeelogin'}), async(req,res) => {
     res.render("serviceprovider.ejs");
   });
+  app.get("/serviceinput",(req,res)=>{
+    res.render("serviceinput.ejs");
+  });
 
 
 app.listen(8080,(req,res)=> {
