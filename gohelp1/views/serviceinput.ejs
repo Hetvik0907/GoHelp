@@ -8,39 +8,39 @@
 <body>
 
   <h1>service provider application form</h1>
-  <form action="/main/<%= category %>" method="post">
+  <form action="/main/servicescrap" method="post">
   <h2>personal information</h2>
   <br>
-  <input type="text" placeholder="enter full name">
+  <input type="text" placeholder="enter full name" name="fullname">
   <br>
-  <input type="number" placeholder="enter your contact nummber">
+  <input type="number" placeholder="enter your contact nummber" name="contactnumber">
   <br>
-  <input type="email" placeholder="enter email">
+  <input type="email" placeholder="enter email" name="emailaddress">
   <br>
-  <textarea name="" id="" placeholder="residential area"></textarea>
+  <textarea name="" id="" placeholder="residential area" name="city"></textarea>
   <br><br>
   <h2>professional detail</h2>
   <h3>choose your service</h3>
   <select name="category">
     <option value="option">Option</option>
-    <option value="option1">ScrapCollection</option>
-    <option value="option2">BabySitting</option>
-    <option value="option3">HouseCleaning</option>
-    <option value="option4">WaterTankCleaning</option>
-    <option value="option5">HandyManservice</option>
+    <option value="ScrapCollection">ScrapCollection</option>
+    <option value="BabySitting">BabySitting</option>
+    <option value="HouseCleaning">HouseCleaning</option>
+    <option value="WaterTankCleaning">WaterTankCleaning</option>
+    <option value="HandyManservice">HandyManservice</option>
   </select>
   <br>
-  <input type="number" placeholder="enter your experience(in year)">
+  <input type="number" placeholder="enter your experience(in year)" name="experience">
   <br>
   <h2>Availability</h2>
-  <input type="text" placeholder="enter your work availability in houur per day">
+  <input type="text" placeholder="enter your work availability in houur per day" name="workhour">
   <br>
   <textarea name="" id="" placeholder="prefered location"></textarea>
   <br>
   <h2>verification</h2>
-  <input type="text" placeholder="enter adharcard Number">
+  <input type="text" placeholder="enter adharcard Number" name="adharcard">
   <br>
-  <input type="file">
+  <input type="file" name="uploadimage">
   <br>
   <input type="number">
   <br>

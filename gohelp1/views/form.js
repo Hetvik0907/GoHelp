@@ -2,45 +2,42 @@ const mongoose = require('mongoose');
 
 // Define the schema
 const ProviderSchema = new mongoose.Schema({
-  fullName: {
+  fullname: {
     type: String,
     required: true,
   },
-  contactNumber: {
+  contactnumber: {
     type: String,
     required: true,
-    match: /^[0-9]{10}$/, 
   },
-  emailAddress: {
+  emailaddress: {
     type: String,
     required: true,
       },
-  city: {
+      city: {
     type: String,
-    required: true,
   },
-  serviceType: {
+  category: {
     type: String,
     required: true,
-    enum: ['Scrap Collection', 'Baby Sitting', 'House Cleaning', 'WaterTank Cleaning','HandyMan service'], 
+    enum: ['ScrapCollection', 'BabySitting', 'HouseCleaning', 'WaterTankCleaning','HandyManservice'], 
     },
   experience: {
     type: Number,
     required: true,
-    min: 0, // Minimum experience in years
+    // Minimum experience in years
   },
-  workHour: {
+  workhour: {
     type: String,
     required: true,
       },
-  uploadImage: {
+  uploadimage: {
     type: String,
     default:"https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1734801006~exp=1734804606~hmac=e7888f9270668377e7e4f6b5ee43962528487984466b0d8abcfa14960503e035&w=740",
   },
-  adharCardNumber:{
+  adharcard:{
     type: String,
     required: true,
-    match: /^[2-9]{1}[0-9]{11}$/,
   },
 });
 

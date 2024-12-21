@@ -128,8 +128,12 @@ app.post("/employeelogin",passport.authenticate("local",{failureRedirect:'/emplo
   app.get("/serviceinput",(req,res)=>{
     res.render("serviceinput.ejs");
   });
-  app.post("/main/ScrapCollection" , (req,res) => {
-    res.send("hello")
+  app.post("/main/servicescrap" , async (req,res) => {
+    const {fullname,contactnumber,emailaddress,city,category,experience,workhour,uploadimage,adharcard} = req.body;
+   const newprovider = new Provider({fullname,contactnumber,emailaddress,city,category,experience,workhour,uploadimage,adharcard});
+    console.log(newprovider);
+    await newprovider.save();
+    res.send("hello");
   })
 
 
