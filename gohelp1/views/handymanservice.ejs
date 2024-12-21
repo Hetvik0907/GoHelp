@@ -6,6 +6,14 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>handyman service details</h1>
+  <% for(let provide of provides){ %>
+    <% if(provide.category == "HandyManservice"){ %>
+    <p><%= provide.fullname %></p>
+    <p><%= provide.city %></p>
+    <p><%= provide.contactnumber %></p>
+    <p><%= provide.experience %></p>
+    <p><%= provide.category %></p>
+    <%}%>
+   <% } %>
 </body>
 </html>

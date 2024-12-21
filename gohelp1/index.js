@@ -10,6 +10,7 @@ const localstrategy = require("passport-local");
 const getdata = require("./views/getSchema.js");
 const forget = require("./views/forget.js");
 const Provider = require("./views/form.js");
+const multer = require('multer');
 
 
 
@@ -93,20 +94,25 @@ passport.deserializeUser(User.deserializeUser());
     res.render("forget.ejs");
   });
 
-  app.get("/main/scrapcollection",(req,res)=>{
-    res.render("scrap.ejs");
+  app.get("/main/scrapcollection",async (req,res)=>{
+    const provides = await Provider.find();
+    res.render("scrap.ejs", {provides});
   });
-  app.get("/main/housecleaning",(req,res)=>{
-    res.render("housecleaning.ejs");
+  app.get("/main/housecleaning",async (req,res)=>{
+    const provides = await Provider.find();
+    res.render("housecleaning.ejs",{provides});
   });
-  app.get("/main/babysitting",(req,res)=>{
-    res.render("babysitting.ejs");
+  app.get("/main/babysitting", async (req,res)=>{
+    const provides = await Provider.find();
+    res.render("babysitting.ejs",{provides});
   });
-  app.get("/main/watertankcleaning",(req,res)=>{
-    res.render("watertankcleaning.ejs");
+  app.get("/main/watertankcleaning",async (req,res)=>{
+    const provides = await Provider.find();
+    res.render("watertankcleaning.ejs",{provides});
   });
-  app.get("/main/handymanservice",(req,res)=>{
-    res.render("handymanservice.ejs");
+  app.get("/main/handymanservice",async (req,res)=>{
+    const provides = await Provider.find();
+    res.render("handymanservice.ejs",{provides});
   });
   app.get("/main/serviceprovider",(req,res)=>{
     res.render("serviceprovider.ejs");
@@ -129,12 +135,12 @@ app.post("/employeelogin",passport.authenticate("local",{failureRedirect:'/emplo
   app.get("/serviceinput",(req,res)=>{
     res.render("serviceinput.ejs");
   });
-  app.post("/main/servicescrap" , async (req,res) => {
+  app.post("/gohelp/serviceproviders" , async (req,res) => {
     const {fullname,contactnumber,emailaddress,city,category,experience,workhour,uploadimage,adharcard} = req.body;
    const newprovider = new Provider({fullname,contactnumber,emailaddress,city,category,experience,workhour,uploadimage,adharcard});
     console.log(newprovider);
     await newprovider.save();
-    res.send("hello");
+    res.render("providerdashbord.ejs");
   })
 
 
