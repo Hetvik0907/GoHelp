@@ -5,23 +5,510 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+<style>
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+  }
+
+  body {
+      background-color: white;
+  }
+
+  /* Navigation Styles */
+  .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      text-decoration: none;
+  }
+
+  .logo img {
+      height: 85px;
+      margin-right: 10px;
+  }
+
+  .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+  }
+
+  .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 1rem;
+  }
+
+  .sign-up-btn {
+      background-color: #ff8c00;
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 15px;
+  }
+
+  /* Hero Section Styles */
+  .hero {
+      display: flex;
+      padding: 4rem 5%;
+      position: relative;
+      overflow: hidden;
+      min-height: calc(100vh - 80px);
+  }
+
+  .hero-content {
+      flex: 1;
+      max-width: 600px;
+      z-index: 3;
+      position: absolute;
+      top: 133px;
+  }
+
+  .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+  }
+
+  .hero-image img {
+      position: absolute;
+      max-width: 100%;
+      height: 700px;
+      width: 900px;
+      right: 35px;
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+  }
+
+  .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+  }
+
+  .hero p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+  }
+
+  .request-btn {
+      display: inline-block;
+      background-color: #ff8c00;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+  }
+
+  /* Wave Effect */
+  .wave-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      z-index: 1;
+      overflow: hidden;
+  }
+
+  .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(transparent 50%, #ff8c00 50%);
+      opacity: 0.3;
+  }
+
+  .wave:nth-child(1) {
+      animation: wave 8s linear infinite;
+      opacity: 0.3;
+  }
+
+  .wave:nth-child(2) {
+      animation: wave 10s linear infinite;
+      opacity: 0.2;
+  }
+
+  .wave:nth-child(3) {
+      animation: wave 12s linear infinite;
+      opacity: 0.1;
+  }
+  
+  @keyframes wave {
+      0% {
+          transform: translateX(0) scaleY(1);
+      }
+      50% {
+          transform: translateX(-25%) scaleY(0.9);
+      }
+      100% {
+          transform: translateX(-50%) scaleY(1);
+      }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+      .hero h1 {
+          font-size: 2.5rem;
+      }
+      
+      .nav-links {
+          gap: 1rem;
+      }
+  }
+
+  @media (max-width: 768px) {
+      .navbar {
+          flex-direction: column;
+          padding: 1rem;
+      }
+
+      .nav-links {
+          margin: 1rem 0;
+          flex-wrap: wrap;
+          justify-content: center;
+      }
+
+      .hero {
+          flex-direction: column;
+          text-align: center;
+          padding: 2rem 1rem;
+      }
+
+      .hero-content {
+          margin-bottom: 2rem;
+      }
+
+      .hero h1 {
+          font-size: 2rem;
+      }
+  }
+  /* ============ Waves shape start========= */
+  .custom-shape-divider-bottom-1734811141 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1734811141 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 184px;
+}
+
+.custom-shape-divider-bottom-1734811141 .shape-fill {
+    fill: #FF9500;
+}
+.custom-shape-divider-top-1734811278 .shape-fill {
+    fill: #FF9500;
+}
+
+
+
+ /* ============ Waves shape end========= */
+
+  /* ============== Service Section start================== */
+  .services-section {
+            padding: 0 0 4rem 0;
+            background-color: white;
+        }
+
+        .wave-background {
+            height: 200px;
+            background-color: #ff8c00;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave-background::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background-image: 
+                radial-gradient(circle at 50% 100%, white 50%, transparent 51%),
+                radial-gradient(circle at 50% 100%, rgba(255, 140, 0, 0.3) 40%, transparent 41%);
+            background-size: 200% 100%;
+            background-position: 0% 0%;
+            animation: waveAnimation 10s linear infinite;
+        }
+
+        @keyframes waveAnimation {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        .services-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .services-header {
+            margin-bottom: 5rem;
+            margin-top: 2rem;
+        }
+
+        .services-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .services-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .service-card {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            text-align: left;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-image {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 35px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-details {
+            flex: 1;
+        }
+
+        .service-details h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-details p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            justify-content:baseline;
+        }
+
+        @media (max-width: 768px) {
+            .service-card {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .service-image {
+                max-width: 100%;
+            }
+
+            .services-header h2 {
+                font-size: 2rem;
+            }
+
+            .service-details h3 {
+                font-size: 1.75rem;
+            }
+        }
+  /* ============== Service Section end================== */
+</style>
 <body>
-  <form action="/signup" method="get">
+  <!-- <form action="/signup" method="get">
     <button>signup</button>
   </form>
-  <br><br>
-  <form action="/login">
+  <br><br> -->
+  <!-- <form action="/login">
     <button>login</button>
-  </form>
+  </form> -->
 
-  <form action="/employeesignup">
-    <button>start earning today</button>
-  </form>
-
-  <form action="/login">
-    <button>login as a service provider</button>
-  </form>
   
+  
+  <nav class="navbar">
+    <a href="#" class="logo">
+        <img src="/images/Logo.png" alt="GoHelp Logo">
+        
+    </a>
+    <ul class="nav-links">
+        <li><a href="#">House Cleaning</a></li>
+        <li><a href="#">Scrap Collecting</a></li>
+        <li><a href="#">Babysitting</a></li>
+        <li><a href="#">Watertank Cleaning</a></li>
+        <li><a href="#">Handyman services</a></li>
+    </ul>
+    <div style="width: 250px; display: flex; 
+        gap: 10px;">
+    <form action="/signup" method="get">
+      <button  class="sign-up-btn">Sign Up</button>
+    </form>
+    <br>
+    <form action="/login">
+      <button  class="sign-up-btn">Login</button>
+    </form>
+    </div>
+    
+    
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Need a hand at home?<br>GoHelp is just a call away!</h1>
+        <p>GoHelp simplifies your life with trusted services for repairs, cleaning, scrap collection, and babysitting—your one-stop solution for every household need!</p>
+        <a href="#" class="request-btn">Request Services</a>
+    </div>
+    <div class="hero-image">
+        <img src="/images/mockup.png" alt="Service Professional">
+    </div>
+    <div class="wave-container">
+        
+    </div>
+    <div class="custom-shape-divider-bottom-1734811141" style="z-index: 10;">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+          <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+          <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+      </svg>
+  </div>
+</section>
+
+<section class="services-section">
+  <div class="custom-shape-divider-top-1734811278" style="z-index: 10;">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+    </svg>
+</div>
+        
+  <div class="services-content">
+      <div class="services-header">
+          <h2>Our Services</h2>
+          <p>GoHelp simplifies your life with trusted services for repairs, cleaning, scrap collection, and babysitting—your one-stop solution for every household need!"</p>
+      </div>
+      <div class="service-card">
+          <div class="service-image">
+              <img src="/images/houseclean.jpg" alt="Professional house cleaning service">
+          </div>
+          <div class="service-details">
+              <h3>House Cleaning</h3>
+              <p>Keep your home sparkling clean with GoHelp's professional house cleaning services. From deep cleaning to regular maintenance, we ensure every corner of your home shines, giving you a fresh and healthy living space</p>
+          </div>
+      </div>
+      <div class="service-card">
+      
+          <div class="service-details">
+              <h3>Scrap Collectinng</h3>
+              <p>We offers convenient scrap collection services and pays you for your unwanted materials. Turn your clutter into cash while contributing to a sustainable environment!</p>
+          </div>
+          <div class="service-image">
+              <img src="/images/scrap.jpg" alt="Professional house cleaning service">
+          </div>
+      </div>
+      <div class="service-card">
+          <div class="service-image">
+              <img src="/images/babysetting.jpg" alt="Professional house cleaning service">
+          </div>
+          <div class="service-details">
+              <h3>Babysitting  Service</h3>
+              <p>We provides caring and reliable babysitting services to ensure your little ones are safe, happy, and well-looked after. Whether you need a few hours or full-time care, we’re here to give you peace of mind.</p>
+          </div>
+          
+      </div>
+      <div class="service-card">
+      
+          <div class="service-details">
+              <h3>Watertank Cleaning</h3>
+              <p>We specializes in both underground and outdoor water tank cleaning. We ensure that your tanks, whether buried or above ground, are thoroughly cleaned and sanitized, providing you with safe and fresh water for your home</p>
+          </div>
+          <div class="service-image">
+              <img src="/images/watertank.jpg" alt="Professional house cleaning service">
+          </div>
+      </div>
+      <div class="service-card">
+          <div class="service-image">
+              <img src="/images/handyman.jpg" alt="Professional house cleaning service">
+          </div>
+          <div class="service-details">
+              <h3>Handyman Services</h3>
+              <p>Our handyman services offer reliable solutions for all your home repair needs. From fixing leaks and electrical issues to assembling furniture and minor renovations, our skilled professionals are here to get the job done efficiently and with care</p>
+          </div>
+          
+      </div>
+  </div>
+</section>
+
+
+
+
+
+<form action="/employeesignup">
+  <button>start earning today</button>
+</form>
+
+<form action="/login">
+  <button>login as a service provider</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <h1>Get in touch!</h1>
   <form action="/gohelp" method="post">
     <input type="text" placeholder="enter your name" name="getname">
