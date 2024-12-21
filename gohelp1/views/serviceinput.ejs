@@ -6,6 +6,50 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>service provider form</h1>
+
+  <h1>service provider application form</h1>
+  <form action="/main/<%= category %>" method="post">
+  <h2>personal information</h2>
+  <br>
+  <input type="text" placeholder="enter full name">
+  <br>
+  <input type="number" placeholder="enter your contact nummber">
+  <br>
+  <input type="email" placeholder="enter email">
+  <br>
+  <textarea name="" id="" placeholder="residential area"></textarea>
+  <br><br>
+  <h2>professional detail</h2>
+  <h3>choose your service</h3>
+  <select name="category">
+    <option value="option">Option</option>
+    <option value="option1">ScrapCollection</option>
+    <option value="option2">BabySitting</option>
+    <option value="option3">HouseCleaning</option>
+    <option value="option4">WaterTankCleaning</option>
+    <option value="option5">HandyManservice</option>
+  </select>
+  <br>
+  <input type="number" placeholder="enter your experience(in year)">
+  <br>
+  <h2>Availability</h2>
+  <input type="text" placeholder="enter your work availability in houur per day">
+  <br>
+  <textarea name="" id="" placeholder="prefered location"></textarea>
+  <br>
+  <h2>verification</h2>
+  <input type="text" placeholder="enter adharcard Number">
+  <br>
+  <input type="file">
+  <br>
+  <input type="number">
+  <br>
+  <input type="number" placeholder="otp">
+  <br>
+<input type="checkbox">i consent........ 
+<br>
+<input type="checkbox">i agreee.......... 
+<button>submit application</button>
+</form>
 </body>
 </html>

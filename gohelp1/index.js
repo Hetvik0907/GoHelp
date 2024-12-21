@@ -9,6 +9,7 @@ const passport = require("passport");
 const localstrategy = require("passport-local");
 const getdata = require("./views/getSchema.js");
 const forget = require("./views/forget.js");
+const Provider = require("./views/form.js");
 
 
 
@@ -64,18 +65,6 @@ passport.deserializeUser(User.deserializeUser());
     const result =await User.register(newuser,password);
     res.redirect("/login");
     
-  });
-  app.post("/signup", async(req,res)=>{
-    try{
-    const {username,email,password} = req.body;
-    const newuser = new User({username,email})
-    const result =await User.register(newuser,password);
-    console.log(result);
-    res.redirect("/login");
-    }
-    catch(err){
-      res.redirect("/signup");
-    }
   });
   app.get("/login", (req,res) => {
     res.render("login.ejs");
@@ -139,6 +128,9 @@ app.post("/employeelogin",passport.authenticate("local",{failureRedirect:'/emplo
   app.get("/serviceinput",(req,res)=>{
     res.render("serviceinput.ejs");
   });
+  app.post("/main/ScrapCollection" , (req,res) => {
+    res.send("hello")
+  })
 
 
 app.listen(8080,(req,res)=> {
