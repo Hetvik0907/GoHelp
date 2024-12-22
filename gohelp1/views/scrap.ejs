@@ -8,6 +8,7 @@
 <body>
    <% for(let provide of provides){ %>
     <% if(provide.category == "ScrapCollection"){ %>
+      <img src="<%= provide.uploadimage.url %>" alt="">
     <p><%= provide.fullname %></p>
     <p><%= provide.city %></p>
     <p><%= provide.contactnumber %></p>

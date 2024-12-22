@@ -8,6 +8,7 @@
 <body>
   <% for(let provide of provides){ %>
     <% if(provide.category == "HandyManservice"){ %>
+      <img src="<%= provide.uploadimage.url %>" alt="">
     <p><%= provide.fullname %></p>
     <p><%= provide.city %></p>
     <p><%= provide.contactnumber %></p>

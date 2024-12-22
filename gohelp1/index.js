@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV != "production"){
+  require('dotenv').config()
+}
 const express=require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -10,10 +13,9 @@ const localstrategy = require("passport-local");
 const getdata = require("./views/getSchema.js");
 const forget = require("./views/forget.js");
 const Provider = require("./views/form.js");
-const multer = require('multer');
-
-
-
+const multer  = require('multer');
+const {storage} = require("./cloudConfig.js");
+const upload = multer({ storage });
 
 
 app.use(express.urlencoded({extended:true}));
@@ -24,15 +26,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-main().then((req,res) => {
-  console.log("connected to db");
-}).catch(err => console.log(err));
+main()
+  .then(() => {
+    console.log("Connected to the database");
+  })
+  .catch(err => {
+    console.error("Database connection error:", err);
+  });
 
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/gohelp');
-
-
 }
+
 
 const getsession =app.use(session({
   secret: "myrule",
@@ -135,13 +140,21 @@ app.post("/employeelogin",passport.authenticate("local",{failureRedirect:'/emplo
   app.get("/serviceinput",(req,res)=>{
     res.render("serviceinput.ejs");
   });
-  app.post("/gohelp/serviceproviders" , async (req,res) => {
-    const {fullname,contactnumber,emailaddress,city,category,experience,workhour,uploadimage,adharcard} = req.body;
-   const newprovider = new Provider({fullname,contactnumber,emailaddress,city,category,experience,workhour,uploadimage,adharcard});
-    console.log(newprovider);
-    await newprovider.save();
-    res.render("providerdashbord.ejs");
-  })
+  app.post("/gohelp/serviceproviders" ,upload.single('uploadimage') , async (req,res) => {
+    let url =req.file.path;
+    let filename = req.file.filename;
+    const uploadimage={url,filename};
+    //console.log(url);
+    //console.log(filename);
+    const {fullname,contactnumber,emailaddress,city,category,experience,workhour,adharcard} = req.body;
+    
+  //   const  {uploadimage} = CLOUDINARY_URL;
+  const newprovider = new Provider({fullname,contactnumber,emailaddress,city,category,experience,workhour,adharcard,uploadimage});
+  await newprovider.save();
+
+  res.render("providerdashbord.ejs");
+  //console.log(req.file);
+  });
 
 
 app.listen(8080,(req,res)=> {

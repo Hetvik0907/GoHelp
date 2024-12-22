@@ -8,7 +8,7 @@
 <body>
 
   <h1>service provider application form</h1>
-  <form action="/gohelp/serviceproviders" method="post">
+  <form action="/gohelp/serviceproviders" method="post" enctype="multipart/form-data">
   <h2>personal information</h2>
   <br>
   <input type="text" placeholder="enter full name" name="fullname">
@@ -17,7 +17,7 @@
   <br>
   <input type="email" placeholder="enter email" name="emailaddress">
   <br>
-  <textarea name="" id="" placeholder="residential area" name="city"></textarea>
+  <input type="text" name="city">
   <br><br>
   <h2>professional detail</h2>
   <h3>choose your service</h3>
