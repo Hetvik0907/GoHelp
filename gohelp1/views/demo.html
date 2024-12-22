@@ -3,189 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoHelp Services</title>
+    <title>Contact Section</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
         }
 
-        .services-section {
-            padding: 0 0 4rem 0;
-            background-color: white;
-        }
-
-        .wave-background {
-            height: 200px;
-            background-color: #ff8c00;
+        .contact-container {
+            background: #fff;
+            padding: 4rem 2rem;
             position: relative;
             overflow: hidden;
+            padding-bottom: 1rem;
+            height: 100vh;
         }
 
-        .wave-background::before {
-            content: '';
+        .top-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: #ff9800;
+            clip-path: ellipse(60% 100% at 50% 0%);
+        }
+
+        .bottom-wave {
             position: absolute;
             bottom: 0;
             left: 0;
-            right: 0;
-            height: 200px;
-            background-image: 
-                radial-gradient(circle at 50% 100%, white 50%, transparent 51%),
-                radial-gradient(circle at 50% 100%, rgba(255, 140, 0, 0.3) 40%, transparent 41%);
-            background-size: 200% 100%;
-            background-position: 0% 0%;
-            animation: waveAnimation 10s linear infinite;
+            width: 100%;
+            height: 120px;
+            background: #ff9800;
+            clip-path: ellipse(60% 100% at 50% 100%);
         }
 
-        @keyframes waveAnimation {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 200% 0%; }
-        }
-
-        .services-content {
+        .info-grid {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-box {
             text-align: center;
-        }
-
-        .services-header {
+            padding: 1rem;
             margin-bottom: 5rem;
-            margin-top: 2rem;
         }
 
-        .services-header h2 {
-            font-size: 2.5rem;
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            margin-top: 5rem;
             margin-bottom: 1rem;
-            color: #333;
+            fill: #ff9800;
         }
 
-        .services-header p {
-            font-size: 1.1rem;
+        .info-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .info-subtitle {
             color: #666;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
 
-        .service-card {
+        .info-detail {
+            color: #ff9800;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .info-detail:hover {
+            text-decoration: underline;
+        }
+
+        .footer-section {
+            margin-top: 2.1rem;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 4rem;
-            text-align: left;
-            margin-top: 3rem;
-            margin-bottom: 3rem;
+            padding: 2rem;
+            position: relative;
+            bottom:-65px;
+            z-index: 1;
         }
 
-        .service-image {
-            flex: 1;
-            max-width: 500px;
+        .footer-logo {
+            max-width: 120px;
         }
 
-        .service-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 35px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
         }
 
-        .service-details {
-            flex: 1;
+        .footer-nav a {
+            color: #000;
+            text-decoration: none;
+            font-size: 0.9rem;
         }
 
-        .service-details h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        .footer-nav a:hover {
             color: #333;
         }
 
-        .service-details p {
-            font-size: 1.1rem;
-            color: #666;
-            line-height: 1.6;
-            justify-content:baseline;
+        .copyright {
+            text-align: center;
+            padding: 1rem;
+            color: #000;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+            bottom: 47px;
+            margin-bottom: 0;
+        }
+
+        .copyright-heart {
+            color: #fff;
+            display: inline-block;
+            margin: 0 0.25rem;
         }
 
         @media (max-width: 768px) {
-            .service-card {
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-section {
                 flex-direction: column;
                 gap: 2rem;
                 text-align: center;
             }
 
-            .service-image {
-                max-width: 100%;
-            }
-
-            .services-header h2 {
-                font-size: 2rem;
-            }
-
-            .service-details h3 {
-                font-size: 1.75rem;
+            .footer-nav {
+                flex-wrap: wrap;
+                justify-content: center;
             }
         }
+
+        /* ======== waves ========== */
+        .custom-shape-divider-bottom-1734892221 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1734892221 svg {
+    position: relative;
+    display: block;
+    width: calc(285% + 1.3px);
+    height: 433px;
+}
+
+.custom-shape-divider-bottom-1734892221 .shape-fill {
+    fill: #FF9800;
+}
     </style>
 </head>
 <body>
-    <section class="services-section">
+    <section class="contact-container">
+        <div class="top-wave"></div>
         
-        <div class="services-content">
-            <div class="services-header">
-                <h2>Our Services</h2>
-                <p>GoHelp simplifies your life with trusted services for repairs, cleaning, scrap collection, and babysitting—your one-stop solution for every household need!"</p>
+        <div class="info-grid">
+            <div class="info-box">
+                <svg class="info-icon" viewBox="0 0 24 24">
+                    <path d="M20 10.999h2C22 5.869 18.127 2 12.99 2v2C17.052 4 20 6.943 20 10.999z"></path>
+                    <path d="M13 8c2.103 0 3 .897 3 3h2c0-3.225-1.775-5-5-5v2zm3.422 5.443a1.001 1.001 0 0 0-1.391.043l-2.393 2.461c-.576-.11-1.734-.471-2.926-1.66-1.192-1.193-1.553-2.354-1.66-2.926l2.459-2.394a1 1 0 0 0 .043-1.391L6.859 3.513a1 1 0 0 0-1.391-.087l-2.17 1.861a1 1 0 0 0-.29.649c-.015.25-.301 6.172 4.291 10.766C11.305 20.707 16.323 21 17.705 21c.202 0 .326-.006.359-.008a.992.992 0 0 0 .648-.291l1.86-2.171a1 1 0 0 0-.086-1.391l-4.064-3.696z"></path>
+                </svg>
+                <h2 class="info-title">Phone</h2>
+                <p class="info-subtitle">Start working with Gohelp that<br>can provide everything</p>
+                <a href="tel:+918128265643" class="info-detail">+91 8128265643</a>
             </div>
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="../public/images/houseclean.jpg" alt="Professional house cleaning service">
-                </div>
-                <div class="service-details">
-                    <h3>House Cleaning</h3>
-                    <p>Keep your home sparkling clean with GoHelp's professional house cleaning services. From deep cleaning to regular maintenance, we ensure every corner of your home shines, giving you a fresh and healthy living space</p>
-                </div>
+
+            <div class="info-box">
+                <svg class="info-icon" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 6.223-8-6.222V6h16zM4 18V9.044l7.386 5.745a.994.994 0 0 0 1.228 0L20 9.044 20.002 18H4z"></path>
+                </svg>
+                <h2 class="info-title">Email</h2>
+                <p class="info-subtitle">Start working with Gohelp that<br>can provide everything</p>
+                <a href="mailto:Support@GoHelp.com" class="info-detail">Support@GoHelp.com</a>
             </div>
-            <div class="service-card">
-            
-                <div class="service-details">
-                    <h3>Scrap Collectinng</h3>
-                    <p>We offers convenient scrap collection services and pays you for your unwanted materials. Turn your clutter into cash while contributing to a sustainable environment!</p>
-                </div>
-                <div class="service-image">
-                    <img src="../public/images/scrap.jpg" alt="Professional house cleaning service">
-                </div>
+
+            <div class="info-box">
+                <svg class="info-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+                </svg>
+                <h2 class="info-title">Location</h2>
+                <p class="info-subtitle">4, Shreenath Park , Waghodia<br>Road, Vadodara, India</p>
+                <a href="#" class="info-detail">View On Google Map</a>
             </div>
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="../public/images/babysetting.jpg" alt="Professional house cleaning service">
-                </div>
-                <div class="service-details">
-                    <h3>Babysitting  Service</h3>
-                    <p>We provides caring and reliable babysitting services to ensure your little ones are safe, happy, and well-looked after. Whether you need a few hours or full-time care, we’re here to give you peace of mind.</p>
-                </div>
-                
-            </div>
-            <div class="service-card">
-            
-                <div class="service-details">
-                    <h3>Watertank Cleaning</h3>
-                    <p>We specializes in both underground and outdoor water tank cleaning. We ensure that your tanks, whether buried or above ground, are thoroughly cleaned and sanitized, providing you with safe and fresh water for your home</p>
-                </div>
-                <div class="service-image">
-                    <img src="../public/images/watertank.jpg" alt="Professional house cleaning service">
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="../public/images/handyman.jpg" alt="Professional house cleaning service">
-                </div>
-                <div class="service-details">
-                    <h3>Handyman Services</h3>
-                    <p>Our handyman services offer reliable solutions for all your home repair needs. From fixing leaks and electrical issues to assembling furniture and minor renovations, our skilled professionals are here to get the job done efficiently and with care</p>
-                </div>
-                
-            </div>
+        </div>
+
+        <div class="footer-section">
+            <img src="../public/images/Logo.png" alt="GoHelp Logo" class="footer-logo">
+            <ul class="footer-nav">
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="copyright">
+            © 2024 GoHelp. Design & Develop with <span class="copyright-heart">♥</span> by The BoYz.
+        </div>
+
+        <div class="custom-shape-divider-bottom-1734892221">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
         </div>
     </section>
 </body>
