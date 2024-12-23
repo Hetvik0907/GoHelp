@@ -3,112 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar with Profile Dropdown</title>
+    <title>Service Provider Requirements</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
         }
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #007BFF;
-            padding: 10px 20px;
+
+        .sp-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
         }
-        .navbar .logo img {
-            height: 40px;
-        }
-        .nav-links {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
-        .nav-links li {
-            margin: 0 10px;
-        }
-        .nav-links a {
-            text-decoration: none;
+
+        .sp-header {
+            background: #ff8c00;
             color: white;
-            font-size: 16px;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
-        .profile-dropdown {
+
+        .sp-section {
+            margin-bottom: 2rem;
+        }
+
+        .sp-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .sp-list {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+
+        .sp-list li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .sp-requirements {
+            counter-reset: requirements;
+        }
+
+        .sp-requirement-item {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
             position: relative;
-            display: inline-block;
         }
-        .dropdown-menu {
-            display: none;
+
+        .sp-requirement-item::before {
+            counter-increment: requirements;
+            content: counter(requirements) ".";
             position: absolute;
-            right: 0;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            overflow: hidden;
-            z-index: 1000;
+            left: 0;
+            font-weight: bold;
         }
-        .dropdown-menu.active {
+
+        .sp-requirement-title {
+            font-weight: bold;
+            display: inline;
+        }
+
+        .sp-apply-button {
             display: block;
-        }
-        .dropdown-menu li {
-            padding: 10px 20px;
-            white-space: nowrap;
-        }
-        .dropdown-menu li img {
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-        .dropdown-menu li a {
+            background: #ff8c00;
+            color: white;
             text-decoration: none;
-            color: #333;
-            font-size: 14px;
+            padding: 1rem 2rem;
+            text-align: center;
+            border-radius: 25px;
+            margin: 2rem auto;
+            max-width: 300px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
-        .dropdown-menu li a:hover {
-            color: #007BFF;
+
+        .sp-apply-button:hover {
+            background: #ff7300;
+        }
+
+        .sp-text {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .sp-container {
+                margin: 1rem;
+                padding: 0.5rem;
+            }
+        }
+
+        .sp-checkbox-group {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .sp-checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 0.5rem;
+        }
+
+        .sp-checkbox-item input[type="checkbox"] {
+            margin-top: 0.25rem;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ff8c00;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .sp-checkbox-item label {
+            font-size: 1rem;
+            line-height: 1.5;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="/images/Logo.png" alt="GoHelp Logo">
-        </a>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#serviceSection">Services</a></li>
-            <li><a href="#askservice">Become Service Provider</a></li>
-            <li><a href="#contactUs">Contact</a></li>
-            <li class="profile-dropdown">
-                <a href="#" id="profileLink">My Profile</a>
-                <ul class="dropdown-menu" id="dropdownMenu">
-                    <li><img src="/images/default-profile.png" alt="Default Profile"> John Doe</li>
-                    <li>Email: john.doe@example.com</li>
-                    <li><a href="/logout">Log Out</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+    <div class="sp-container">
+        <header class="sp-header">
+            Want to Provide A Service...?
+        </header>
 
-    <script>
-        // JavaScript for dropdown functionality
-        const profileLink = document.getElementById('profileLink');
-        const dropdownMenu = document.getElementById('dropdownMenu');
+        <section class="sp-section">
+            <h2 class="sp-title">Service Provider Requirements</h2>
+            <p class="sp-text">Are you passionate about providing top-notch services? Join our team of trusted professionals! We are looking for reliable, skilled, and customer-focused individuals to deliver exceptional services in the following areas:</p>
+            
+            <ul class="sp-list">
+                <li>Scrap Collecting</li>
+                <li>Babysitting</li>
+                <li>House Cleaning</li>
+                <li>Handyman Services</li>
+                <li>Water Tank Cleaning</li>
+            </ul>
+        </section>
 
-        profileLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            dropdownMenu.classList.toggle('active');
-        });
+        <section class="sp-section">
+            <h2 class="sp-title">Requirements:</h2>
+            <div class="sp-requirements">
+                <div class="sp-requirement-item">
+                    <span class="sp-requirement-title">Experience:</span> Prior experience in the relevant service area is preferred but not mandatory. Training can be provided for deserving candidates.
+                </div>
+                <div class="sp-requirement-item">
+                    <span class="sp-requirement-title">Professionalism:</span> A strong commitment to quality, reliability, and customer satisfaction.
+                </div>
+                <div class="sp-requirement-item">
+                    <span class="sp-requirement-title">Background Verification:</span> All applicants must undergo a background check for safety and trustworthiness.
+                </div>
+                <div class="sp-requirement-item">
+                    <span class="sp-requirement-title">Equipment:</span> Depending on the service, you may need to bring your tools or equipment.
+                </div>
+                <div class="sp-requirement-item">
+                    <span class="sp-requirement-title">Communication:</span> Ability to communicate effectively with clients and team members.
+                </div>
+                <div class="sp-requirement-item">
+                    <span class="sp-requirement-title">Punctuality:</span> Be punctual and adhere to the schedule agreed upon with clients.
+                </div>
+                <div class="sp-requirement-item">
+                    <span class="sp-requirement-title">Local Knowledge:</span> Familiarity with the service area is a plus.
+                </div>
+            </div>
+        </section>
 
-        // Close dropdown if clicked outside
-        document.addEventListener('click', (event) => {
-            if (!profileLink.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                dropdownMenu.classList.remove('active');
-            }
-        });
-    </script>
+        <section class="sp-section">
+            <h2 class="sp-title">Benefits of Joining Us:</h2>
+            <ul class="sp-list">
+                <li>Flexible working hours.</li>
+                <li>Competitive pay and regular job assignments.</li>
+                <li>Opportunity for growth and skill development.</li>
+                <li>Be part of a trusted and growing business.</li>
+            </ul>
+        </section>
+
+        <p class="sp-text">If you meet the above requirements and are passionate about delivering excellent service, we'd love to hear from you!</p>
+        
+        <p class="sp-text">Apply Now:</p>
+        <p class="sp-text">Click the button below to fill out our application form and start your journey with us.</p>
+        
+        <div class="sp-checkbox-group">
+            <div class="sp-checkbox-item">
+                <input type="checkbox" id="consent" name="consent" required>
+                <label for="consent">I consent to a background verification process</label>
+            </div>
+            <div class="sp-checkbox-item">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the terms and conditions of the platform.</label>
+            </div>
+        </div>
+
+        <a href="#" class="sp-apply-button">Start Earning Today</a>
+    </div>
 </body>
 </html>
