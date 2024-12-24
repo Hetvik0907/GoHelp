@@ -9,7 +9,6 @@ const getSchema = new mongoose.Schema({
   getemail: {
     type: String,
     required: true,
-    unique: true,
   },
   getsubject: {
     type: String,
@@ -22,4 +21,4 @@ const getSchema = new mongoose.Schema({
 });
 getSchema.plugin(passportLocalMongoose);
 
-module.exports =mongoose.model('getdata',getSchema);
+module.exports =mongoose.model('getdatas',getSchema);

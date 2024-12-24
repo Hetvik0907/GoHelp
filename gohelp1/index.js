@@ -18,6 +18,7 @@ const {storage} = require("./cloudConfig.js");
 const upload = multer({ storage });
 
 
+
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'))
 app.set("view engine","ejs");
@@ -84,8 +85,9 @@ passport.deserializeUser(User.deserializeUser());
     res.redirect("/main");
   });
 
-  app.get("/main", (req,res)=> {
-  res.render("main.ejs");
+  app.get("/main", async (req,res)=> {
+    const user = await User.find();
+  res.render("main.ejs",{user});
   });
   app.post("/gohelp" , async(req,res) => {
     
@@ -120,27 +122,35 @@ passport.deserializeUser(User.deserializeUser());
     const provides = await Provider.find();
     res.render("handymanservice.ejs",{provides});
   });
-  app.get("/main/serviceprovider",(req,res)=>{
-    res.render("serviceprovider.ejs");
+  app.get("/main/serviceprovider",async(req,res)=>{
+    const user = await User.find();
+    res.render("serviceprovider.ejs",{user});
   });
   app.get("/employeesignup", (req,res)=>{
-    res.render("employeesignup.ejs");
+    res.render("employeesignup.ejs", );
   });
   app.post("/employeesignup", async(req,res)=>{
     const {username,email,password} = req.body;
-    const newuser = new User({username,email})
-    const result =await User.register(newuser,password);
+    const newemployee = new User({username,email})
+    const result =await User.register(newemployee,password);
+    console.log(result);
     res.redirect("/employeelogin");
   });
   app.get("/employeelogin", (req,res) => {
     res.render("employeelogin.ejs");
   })
-app.post("/employeelogin",passport.authenticate("local",{failureRedirect:'/employeelogin'}), async(req,res) => {
-    res.render("serviceprovider.ejs");
+app.post("/employeelogin", passport.authenticate("local",{failureRedirect:'/employeelogin'}), async (req,res) => {
+  if (!User.isAggriment) {
+    const user = await User.find();
+    res.render("serviceprovider.ejs" , {user})
+    
+} else {
+  const provides = await Provider.find();
+  const user = await User.find();
+    res.render("providerdashbord.ejs",{user,provides})
+}
   });
-  app.get("/serviceinput",(req,res)=>{
-    res.render("serviceinput.ejs");
-  });
+  
   app.post("/gohelp/serviceproviders" ,upload.single('uploadimage') , async (req,res) => {
     let url =req.file.path;
     let filename = req.file.filename;
@@ -156,8 +166,17 @@ app.post("/employeelogin",passport.authenticate("local",{failureRedirect:'/emplo
   res.render("providerdashbord.ejs");
   //console.log(req.file);
   });
+//   app.get("/employeelogins", (req,res) => {
+//     res.render("outemployeelogin.ejs");
+//   })
+// app.post("/employeelogins",passport.authenticate("local",{failureRedirect:'/employeelogins'}), (req,res) => {
+//     res.render("providerdashbord.ejs");
+//   });
 
-
+app.get("/serviceinput/", async (req,res)=>{
+  //await User.findByIdAndUpdate(userId, { agreementAccepted: true });
+  res.render("serviceinput.ejs");
+});
 app.listen(8080,(req,res)=> {
   console.log("app is live in port 8080");
 })
