@@ -16,6 +16,9 @@ const Provider = require("./views/form.js");
 const multer  = require('multer');
 const {storage} = require("./cloudConfig.js");
 const upload = multer({ storage });
+const Employ = require("./views/employSchema.js");
+// const localstrategyEmploy = require("passport-local").Strategy;
+// const bodyParser = require('body-parser');
 
 
 
@@ -54,10 +57,6 @@ app.use(passport.session());
 passport.use(new localstrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-
-
-
 
   app.get("/gohelp", (req, res) => {
     res.render("landing.ejs");  
@@ -130,25 +129,40 @@ passport.deserializeUser(User.deserializeUser());
     res.render("employeesignup.ejs", );
   });
   app.post("/employeesignup", async(req,res)=>{
-    const {username,email,password} = req.body;
-    const newemployee = new User({username,email})
-    const result =await User.register(newemployee,password);
-    console.log(result);
+    const {employname,employmail,employpassword} = req.body;
+    const newemploy = new Employ({employname,employmail,employpassword})
+    await newemploy.save();
+    console.log(newemploy);
     res.redirect("/employeelogin");
   });
   app.get("/employeelogin", (req,res) => {
     res.render("employeelogin.ejs");
   })
-app.post("/employeelogin", passport.authenticate("local",{failureRedirect:'/employeelogin'}), async (req,res) => {
-  if (!User.isAggriment) {
-    const user = await User.find();
-    res.render("serviceprovider.ejs" , {user})
-    
-} else {
-  const provides = await Provider.find();
-  const user = await User.find();
-    res.render("providerdashbord.ejs",{user,provides})
+app.post("/employeelogin", async (req,res) => {
+  let email = req.body.employmail;
+  let password =  req.body.employpassword;
+  console.log(email);
+  console.log(password);
+  
+  try {
+    const employ = await Employ.findOne({ employmail: email,employpassword: password });
+    if (!employ) {
+        res.send("invalid credentials");
+    }
+    else{
+    const provider = await Provider.findOne({ emailaddress: email,});
+    if (!provider) {
+        res.render("serviceprovider.ejs");
+    }
+    else{
+      res.render("providerdashbord.ejs");
+    }
+  }
+   
+} catch (error) {
+  console.error('Error during authentication:', error);
 }
+
   });
   
   app.post("/gohelp/serviceproviders" ,upload.single('uploadimage') , async (req,res) => {
@@ -173,7 +187,7 @@ app.post("/employeelogin", passport.authenticate("local",{failureRedirect:'/empl
 //     res.render("providerdashbord.ejs");
 //   });
 
-app.get("/serviceinput/", async (req,res)=>{
+app.get("/serviceinput", async (req,res)=>{
   //await User.findByIdAndUpdate(userId, { agreementAccepted: true });
   res.render("serviceinput.ejs");
 });

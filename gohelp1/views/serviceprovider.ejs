@@ -5,9 +5,158 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .sp-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .sp-header {
+            background: #ff8c00;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .sp-section {
+            margin-bottom: 2rem;
+        }
+
+        .sp-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .sp-list {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+
+        .sp-list li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .sp-requirements {
+            counter-reset: requirements;
+        }
+
+        .sp-requirement-item {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .sp-requirement-item::before {
+            counter-increment: requirements;
+            content: counter(requirements) ".";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .sp-requirement-title {
+            font-weight: bold;
+            display: inline;
+        }
+
+        .sp-apply-button {
+            display: block;
+            background: #ff8c00;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            text-align: center;
+            border-radius: 25px;
+            margin: 2rem auto;
+            max-width: 300px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .sp-apply-button:hover {
+            background: #ff7300;
+        }
+
+        .sp-text {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .sp-container {
+                margin: 1rem;
+                padding: 0.5rem;
+            }
+        }
+
+        .sp-checkbox-group {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .sp-checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 0.5rem;
+        }
+
+        .sp-checkbox-item input[type="checkbox"] {
+            margin-top: 0.25rem;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ff8c00;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .sp-checkbox-item label {
+            font-size: 1rem;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+
+
+</style>
 <body>
-  <form action="/serviceinput" method="get">
+  <form action="/serviceinput" >
     <button>become service provider</button>
   </form>
+  <script>
+    const acceptAgreementBtn = document.getElementById('accbtn');
+    const agreeCheckbox = document.getElementById('consent');
+    const agreeCheckbox2 = document.getElementById('terms');
+    
+
+    acceptAgreementBtn.addEventListener('click', () => {
+        if (agreeCheckbox.checked && agreeCheckbox2.checked) {
+            // Redirect to the target page
+            window.location.href = "/serviceinput";
+        } else {
+            alert("Please agree to the terms and conditions before proceeding.");
+        }
+    });
+</script>
 </body>
 </html>
