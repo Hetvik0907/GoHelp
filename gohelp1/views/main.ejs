@@ -1041,6 +1041,8 @@
 
 <body>
 
+
+
   <nav class="navbar">
     <a href="#" class="logo">
       <img src="/images/Logo.png" alt="GoHelp Logo">
@@ -1054,11 +1056,16 @@
       <li class="profile-dropdown">
         <a href="#" id="profileLink">My Profile</a>
         <ul class="dropdown-menu" id="dropdownMenu">
+
+          <% for (let use of user){ %>
+         <%    if (use.username ===  username) { %>             
           <li>
-            <img src="/images/userDefault.avif" alt="Default Profile"> John Doe
+            <img src="/images/userDefault.avif" alt="Default Profile"> <%= username %>
           </li>
-          <li>Email: john.doe@example.com</li>
+          <li><%= use.email %></li>
           <li><a href="/gohelp">Log Out</a></li>
+        <% } %>
+        <% } %>
         </ul>
       </li>
 

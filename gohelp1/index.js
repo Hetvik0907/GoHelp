@@ -76,13 +76,15 @@ app.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
   async (req, res) => {
-    res.redirect("/main");
+    const {username} = req.body;
+    res.redirect(`/main/${encodeURIComponent(username)}`);
   }
 );
 
-app.get("/main", async (req, res) => {
+app.get("/main/:username", async (req, res) => {
   const user = await User.find();
-  res.render("main.ejs", { user });
+  const {username} = req.params;
+  res.render("main.ejs", { user,username});
 });
 app.post("/gohelp", async (req, res) => {
   const { getname, getemail, getsubject, getcomment } = req.body;
