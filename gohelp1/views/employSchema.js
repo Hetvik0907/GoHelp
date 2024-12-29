@@ -8,6 +8,7 @@ const EmploySchema = new mongoose.Schema({
   employmail: {    
     type: String,
     sparse: true,
+    unique: true,
   },
   employpassword: {
     type: String,

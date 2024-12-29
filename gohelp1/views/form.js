@@ -12,6 +12,7 @@ const ProviderSchema = new mongoose.Schema({
   },
   emailaddress: {
     type: String,
+    unique: true,
       },
   city: {
     type: String,

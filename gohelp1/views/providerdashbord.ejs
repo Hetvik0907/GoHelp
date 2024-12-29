@@ -3,9 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Service Provider Dashboard</title>
 </head>
 <body>
-  <h1>service provider dashboard</h1>
+  <h1>Service Provider Dashboard</h1>
+
+  <% for (let pro of provides) { %>
+    <% if (pro.emailaddress === employmail) { %>
+      <section>
+        <h2>Provider Details</h2>
+        <p>Name: <%= pro.fullname %></p>
+        <p>Contact: <%= pro.contactnumber %></p>
+        <p>Email: <%= pro.emailaddress %></p>
+        <img src="<%= pro.uploadimage?.url %>" alt="Provider Image">
+
+        <% const matchedRequests = request.filter(req => req.emailaddress === pro.emailaddress); %>
+        <% if (matchedRequests.length > 0) { %>
+          <h3>Request Details</h3>
+          <% for (let req of matchedRequests) { %>
+            <p>Username: <%= req.username %></p>
+            <p>Address: <%= req.useraddress %></p>
+            <p>Service: <%= req.userservice %></p>
+          <% } %>
+        <% } else { %>
+          <p>No matching requests for this provider.</p>
+        <% } %>
+      </section>
+    <% } %>
+  <% } %>
 </body>
 </html>

@@ -17,6 +17,7 @@ const multer = require("multer");
 const { storage } = require("./cloudConfig.js");
 const upload = multer({ storage });
 const Employ = require("./views/employSchema.js");
+const Request = require("./views/order.js");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -81,11 +82,7 @@ app.post(
   }
 );
 
-app.get("/main/:username", async (req, res) => {
-  const user = await User.find();
-  const {username} = req.params;
-  res.render("main.ejs", { user,username});
-});
+
 app.post("/gohelp", async (req, res) => {
   const { getname, getemail, getsubject, getcomment } = req.body;
   const newdata = new getdata({ getname, getemail, getsubject, getcomment });
@@ -98,29 +95,36 @@ app.get("/forget", (req, res) => {
   res.render("forget.ejs");
 });
 
-app.get("/main/scrapcollection", async (req, res) => {
+app.get("/main/:username/scrapcollection", async (req, res) => {
   const provides = await Provider.find();
   res.render("scrap.ejs", { provides });
 });
-app.get("/main/housecleaning", async (req, res) => {
+app.get("/main/:username/housecleaning", async (req, res) => {
   const provides = await Provider.find();
   res.render("housecleaning.ejs", { provides });
 });
-app.get("/main/babysitting", async (req, res) => {
+app.get("/main/:username/babysitting", async (req, res) => {
   const provides = await Provider.find();
   res.render("babysitting.ejs", { provides });
 });
-app.get("/main/watertankcleaning", async (req, res) => {
+app.get("/main/:username/watertankcleaning", async (req, res) => {
   const provides = await Provider.find();
   res.render("watertankcleaning.ejs", { provides });
 });
-app.get("/main/handymanservice", async (req, res) => {
+app.get("/main/:username/handymanservice", async (req, res) => {
   const provides = await Provider.find();
   res.render("handymanservice.ejs", { provides });
 });
+
+
 app.get("/main/serviceprovider", async (req, res) => {
   const user = await User.find();
   res.render("serviceprovider.ejs", { user });
+});
+app.get("/main/:username", async (req, res) => {
+  const user = await User.find();
+  const {username} = req.params;
+  res.render("main.ejs", { user,username});
 });
 app.get("/employeesignup", (req, res) => {
   res.render("employeesignup.ejs");
@@ -136,29 +140,35 @@ app.get("/employeelogin", (req, res) => {
   res.render("employeelogin.ejs");
 });
 app.post("/employeelogin", async (req, res) => {
-  let email = req.body.employmail;
+  let employmail = req.body.employmail;
   let password = req.body.employpassword;
-  console.log(email);
+  console.log(employmail);
   console.log(password);
 
   try {
     const employ = await Employ.findOne({
-      employmail: email,
+      employmail: employmail,
       employpassword: password,
     });
     if (!employ) {
       res.send("invalid credentials");
     } else {
-      const provider = await Provider.findOne({ emailaddress: email });
+      const provider = await Provider.findOne({ emailaddress: employmail });
       if (!provider) {
         res.render("serviceprovider.ejs");
       } else {
-        res.render("providerdashbord.ejs");
+        const provides = await Provider.find();
+        const request = await Request.find();
+        res.render("providerdashbord.ejs",{employmail,provides,request});
       }
     }
   } catch (error) {
     console.error("Error during authentication:", error);
   }
+});
+
+app.get("/serviceinput", async (req, res) => {
+  res.render("serviceinput.ejs");
 });
 
 app.post(
@@ -206,10 +216,61 @@ app.post(
 //     res.render("providerdashbord.ejs");
 //   });
 
-app.get("/serviceinput", async (req, res) => {
-  //await User.findByIdAndUpdate(userId, { agreementAccepted: true });
-  res.render("serviceinput.ejs");
+app.get("/main/:username/scrapcollection/:emailaddress", async(req,res) => {
+  const {username} = req.params;
+  const {emailaddress} = req.params;
+  console.log(username);
+  console.log(emailaddress);
+  const user = await User.find();
+  res.render("reqscrap.ejs", {user,username,emailaddress});
 });
+
+app.get("/main/:username/WaterTankCleaning/:emailaddress", async(req,res) => {
+  const {username} = req.params;
+  const {emailaddress} = req.params;
+  console.log(username);
+  console.log(emailaddress);
+  const user = await User.find();
+  res.render("reqwatertankcleaning.ejs", {user,username,emailaddress});
+});
+app.get("/main/:username/BabySitting/:emailaddress", async(req,res) => {
+  const {username} = req.params;
+  const {emailaddress} = req.params;
+  console.log(username);
+  console.log(emailaddress);
+  const user = await User.find();
+  res.render("reqbabysitting.ejs", {user,username,emailaddress});
+});
+app.get("/main/:username/HouseCleaning/:emailaddress", async(req,res) => {
+  const {username} = req.params;
+  const {emailaddress} = req.params;
+  console.log(username);
+  console.log(emailaddress);
+  const user = await User.find();
+  res.render("reqhousecleaning.ejs", {user,username,emailaddress});
+});
+
+app.get("/main/:username/HandyManservice/:emailaddress", async(req,res) => {
+  const {username} = req.params;
+  const {emailaddress} = req.params;
+  console.log(username);
+  console.log(emailaddress);
+  const user = await User.find();
+  res.render("reqhandyman.ejs", {user,username,emailaddress});
+});
+
+app.post("/main/:username/:emailaddress", async (req, res) => {
+  let {username,emailaddress} = req.params;
+  let {usernames,useraddress,usermobile,useremail,userservice} = req.body;
+  console.log(req.body)
+  const newrequest = new Request({username,usernames, useraddress,usermobile,useremail,userservice, emailaddress });
+  console.log(newrequest);
+  await newrequest.save();
+  res.redirect(`/main/${username}`);
+});
+
+
+
 app.listen(8080, (req, res) => {
   console.log("app is live in port 8080");
 });
