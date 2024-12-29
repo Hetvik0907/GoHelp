@@ -8,6 +8,10 @@ const RequestSchema = new mongoose.Schema({
   useremail: String,
   userservice: String,
   emailaddress: String,
+  status:{
+    type:String,
+    default:"Pending"
+  }
 });
 
 const Request = mongoose.model("Request", RequestSchema);

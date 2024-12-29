@@ -269,6 +269,46 @@ app.post("/main/:username/:emailaddress", async (req, res) => {
   res.redirect(`/main/${username}`);
 });
 
+app.get("/employlogin/:employmail/:id", async (req, res) => {
+  const employmail = req.params.employmail;
+  const id = req.params.id; // Use the correct route parameter
+  const { action } = req.query;
+
+  try {
+    // Find the request by ID and update the status
+    const updatedRequest = await Request.findByIdAndUpdate(
+      id, // Match the document by its ID
+      { status: action === "accept" ? "Accepted" : "Rejected" }, // Update based on action
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedRequest) {
+      return res.status(404).send("Request not found");
+    }
+
+    // Fetch all requests for rendering
+    const request = await Request.find();
+
+    // Render the updated page
+    res.render("order.ejs", { employmail, request, action });
+  } catch (error) {
+    console.error("Error updating request:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/employlogin/:employmail", async (req,res) => {
+  const employmail = req.params.employmail;
+  const request = await Request.find();
+  res.render("order.ejs",{employmail,request});
+});
+
+app.get("/:employmail", async(req,res)=> {
+  const employmail = req.params.employmail;
+  const provides = await Provider.find();
+    res.render("profile.ejs",{provides,employmail});
+});
+
 
 
 app.listen(8080, (req, res) => {

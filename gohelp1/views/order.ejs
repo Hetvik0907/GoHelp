@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table>
+      <th>name</th>
+      <th>service</th>
+      <th>mobilenumber</th>
+      <th>status</th>
+    </table>
+    <div><%=employmail %></div>
+    <% for(let req of request) { %> <% if (req.emailaddress === employmail) { %>
+    <tr>
+      <td><%= req.usernames %></td>
+      <td><%= req.userservice %></td>
+      <td><%= req.usermobile %></td>
+      <% const now = new Date(); %> 
+      <% const hours = now.getHours();// Get thehour (0-23) %>
+       <% const minutes = now.getMinutes(); // Get the minutes(0-59) %>
+        <% const time = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2, '0')}`; %>
+      <td><%= time %></td>
+      <td><%= req.status %></td>
+    </tr>
+    <br />
+    <% } %> <% } %>
+  </body>
+</html>

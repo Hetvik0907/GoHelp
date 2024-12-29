@@ -8,6 +8,9 @@
 <body>
   <h1>Service Provider Dashboard</h1>
 
+  <a href="<%= employmail %>">go to your profile</a>
+  <a href="/employlogin/<%= employmail %>">show order history</a>
+
   <% for (let pro of provides) { %>
     <% if (pro.emailaddress === employmail) { %>
       <section>
@@ -21,9 +24,11 @@
         <% if (matchedRequests.length > 0) { %>
           <h3>Request Details</h3>
           <% for (let req of matchedRequests) { %>
-            <p>Username: <%= req.username %></p>
+            <p>Username: <%= req.usernames %></p>
             <p>Address: <%= req.useraddress %></p>
             <p>Service: <%= req.userservice %></p>
+            <a href="/employlogin/<%= employmail %>/<%=req._id%>?action=accept">Accept</a>
+            <a href="/employlogin/<%= employmail %>/<%=req._id%>/?action=reject">Reject</a>
           <% } %>
         <% } else { %>
           <p>No matching requests for this provider.</p>
