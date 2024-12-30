@@ -175,6 +175,7 @@ app.post(
   "/gohelp/serviceproviders",
   upload.single("uploadimage"),
   async (req, res) => {
+    let employmail = req.body.emailaddress;
     let url = req.file.path;
     let filename = req.file.filename;
     const uploadimage = { url, filename };
@@ -204,8 +205,9 @@ app.post(
       uploadimage,
     });
     await newprovider.save();
-
-    res.render("providerdashbord.ejs");
+    const provides = await Provider.find();
+    const request = await Request.find();
+    res.render("providerdashbord.ejs",{employmail,provides,request});
     //console.log(req.file);
   }
 );
@@ -303,7 +305,7 @@ app.get("/employlogin/:employmail", async (req,res) => {
   res.render("order.ejs",{employmail,request});
 });
 
-app.get("/:employmail", async(req,res)=> {
+app.get("/gohelp/:employmail", async(req,res)=> {
   const employmail = req.params.employmail;
   const provides = await Provider.find();
     res.render("profile.ejs",{provides,employmail});
