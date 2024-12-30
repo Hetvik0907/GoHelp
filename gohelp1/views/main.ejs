@@ -1029,14 +1029,78 @@
             cursor: pointer;
         }
 
-
-
         .hidden {
     display: none;
 }
 .height{
   height: 78vh;
 }
+
+/* ===============your orders ====================== */
+.header {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .header-button {
+            background-color: #ff9800;
+            color: black;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            color: #666;
+            font-weight: normal;
+        }
+
+        .status {
+            padding: 5px 15px;
+            border-radius: 15px;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .status-pending {
+            background-color: #ffebee;
+            color: #f44336;
+        }
+
+        .status-confirmed {
+            background-color: #e8f5e9;
+            color: #4caf50;
+        }
+
+        .chat-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .chat-icon {
+            width: 24px;
+            height: 24px;
+            fill: #ff9800; 
+        }
+        .active a{
+          color:#ff9800;
+        }
 </style>
 
 <body>
@@ -1049,10 +1113,11 @@
 
     </a>
     <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#serviceSection">Services</a></li>
-      <li><a href="#askservice">Become Service Provider</a></li>
+      <li><a href="#" class="hbtn">Home</a></li>
+      <li><a href="#serviceSection" class="sbtn">Services</a></li>
+      <li><a href="#askservice" class="spbtn">Become Service Provider</a></li>
       <li><a href="#contactUs">Contact</a></li>
+      <li><a href="#" class="ybtn">Your Orders</a></li>
       <li class="profile-dropdown">
         <a href="#" id="profileLink">My Profile</a>
         <ul class="dropdown-menu" id="dropdownMenu">
@@ -1147,6 +1212,57 @@
   <a href="#" class="sp-apply-button" id="accbtn">Start Earning Today</a>
 </div>
 <!-- ============================================== Agreement End ================================================== -->
+ <!-- ============================================== your orders start ================================================== -->
+ <section class="ord hidden">
+ <div class="header">
+  <button class="header-button">Your Order</button>
+</div>
+
+<table>
+  <thead>
+      <tr>
+          <th>Sr.no.</th>
+          <th>Name</th>
+          <th>Service</th>
+          <th>Mobile No</th>
+          <th>Status</th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1.</td>
+          <td>Rohit Bhatt</td>
+          <td>Handyman Service</td>
+          <td>9865324556</td>
+          <td><span class="status status-pending">Pending</span></td>
+          <td>
+              <button class="chat-button">
+                  <svg class="chat-icon" viewBox="0 0 24 24">
+                      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+                  </svg>
+              </button>
+          </td>
+      </tr>
+      <tr>
+          <td>2.</td>
+          <td>Dharmesh Garg</td>
+          <td>Scrap Collection Service</td>
+          <td>8495758696</td>
+          <td><span class="status status-confirmed">Confirmed</span></td>
+          <td>
+              <button class="chat-button">
+                  <svg class="chat-icon" viewBox="0 0 24 24">
+                      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+                  </svg>
+              </button>
+          </td>
+      </tr>
+  </tbody>
+</table>
+</section>
+
+  <!-- ============================================== your orders end ================================================== -->
 
   <section class="hero">
     <div class="hero-content">
@@ -1370,8 +1486,13 @@ const service = document.querySelector(".services-section");
 const provider = document.querySelector(".serviceask");
 const about = document.querySelector(".about-us");
 const button = document.querySelector(".btn");
+const orderBtn = document.querySelector(".ybtn");
 const Aggrement = document.querySelector(".sp-container");
-const lastdiv = document.querySelector(".contact-container")
+const lastdiv = document.querySelector(".contact-container");
+const order = document.querySelector(".ord");
+const hbtn = document.querySelector(".hbtn");
+const sbtn = document.querySelector(".sbtn");
+const spbtn = document.querySelector(".spbtn");
 
 // Show agreement section and hide all other content
 button.addEventListener('click', () => {
@@ -1383,6 +1504,46 @@ button.addEventListener('click', () => {
 
     Aggrement.classList.remove('hidden');
 });
+
+orderBtn.addEventListener('click', ()=>{
+  home.classList.add('hidden');
+    service.classList.add('hidden');
+    provider.classList.add('hidden');
+    about.classList.add('hidden');
+    Aggrement.classList.add('hidden');
+    lastdiv.classList.add('height');
+    order.classList.remove('hidden');
+});
+
+hbtn.addEventListener('click', () => {
+    home.classList.remove('hidden');
+    service.classList.remove('hidden');
+    provider.classList.remove('hidden');
+    about.classList.remove('hidden');
+    lastdiv.classList.remove('height');
+    order.classList.add('hidden');
+    Aggrement.classList.add('hidden');
+});
+sbtn.addEventListener('click', () => {
+    home.classList.remove('hidden');
+    service.classList.remove('hidden');
+    provider.classList.remove('hidden');
+    about.classList.remove('hidden');
+    lastdiv.classList.remove('height');
+    order.classList.add('hidden');
+    Aggrement.classList.add('hidden');
+});
+spbtn.addEventListener('click', () => {
+    home.classList.remove('hidden');
+    service.classList.remove('hidden');
+    provider.classList.remove('hidden');
+    about.classList.remove('hidden');
+    lastdiv.classList.remove('height');
+    order.classList.add('hidden');
+    Aggrement.classList.add('hidden');
+});
+
+
 
 // Optionally, handle agreement acceptance
 
@@ -1400,6 +1561,16 @@ const acceptAgreementBtn = document.getElementById('accbtn');
             alert("Please agree to the terms and conditions before proceeding.");
         }
     });
+
+
+
+    document.querySelectorAll('.chat-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const name = row.querySelector('td:nth-child(2)').textContent;
+                alert(`Opening chat with ${name}`);
+            });
+        });
 
   </script>
 
