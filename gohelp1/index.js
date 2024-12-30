@@ -274,6 +274,7 @@ app.post("/main/:username/:emailaddress", async (req, res) => {
 app.get("/employlogin/:employmail/:id", async (req, res) => {
   const employmail = req.params.employmail;
   const id = req.params.id; // Use the correct route parameter
+  
   const { action } = req.query;
 
   try {
@@ -290,9 +291,10 @@ app.get("/employlogin/:employmail/:id", async (req, res) => {
 
     // Fetch all requests for rendering
     const request = await Request.find();
+    const provides = await Provider.find();
 
     // Render the updated page
-    res.render("order.ejs", { employmail, request, action });
+    res.render("providerdashbord.ejs", { employmail, request, action,provides});
   } catch (error) {
     console.error("Error updating request:", error);
     res.status(500).send("Internal Server Error");
@@ -305,11 +307,7 @@ app.get("/employlogin/:employmail", async (req,res) => {
   res.render("order.ejs",{employmail,request});
 });
 
-app.get("/gohelp/:employmail", async(req,res)=> {
-  const employmail = req.params.employmail;
-  const provides = await Provider.find();
-    res.render("profile.ejs",{provides,employmail});
-});
+
 
 
 
