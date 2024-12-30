@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -23,6 +23,7 @@
         <% const matchedRequests = request.filter(req => req.emailaddress === pro.emailaddress); %>
         <% if (matchedRequests.length > 0) { %>
           <h3>Request Details</h3>
+          
           <% for (let req of matchedRequests) { %>
             <p>Username: <%= req.usernames %></p>
             <p>Address: <%= req.useraddress %></p>
@@ -36,5 +37,647 @@
       </section>
     <% } %>
   <% } %>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        :root {
+            --primary-color: #FF8C00;
+            --sidebar-width: 240px;
+            --header-height: 60px;
+        }
+
+        body {
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            border-right: 1px solid #ddd;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 auto 10px;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 12px 15px;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item:hover {
+            background: #f5f5f5;
+        }
+
+        .nav-item.active {
+            background: #fff3e6;
+            color: var(--primary-color);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 20px;
+            padding-top: calc(var(--header-height) + 20px);
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: var(--sidebar-width);
+            height: var(--header-height);
+            background: white;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Service Cards Grid */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .provider-name {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .service-details {
+            margin-bottom: 20px;
+        }
+
+        .service-details p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn-reject {
+            background: #fff3e6;
+            color: var(--primary-color);
+        }
+
+        .btn-accept {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .page-title {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Content Section Styles */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Profile Section Styles */
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            padding-top: 3rem;
+        }
+
+        .profile-badge {
+            background-color: #FF8C00;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .profile-content {
+        
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .profile-name {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-email {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .profile-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #000;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            background-color: #E0E0E0;
+            border-radius: 4px;
+            font-size: 1rem;
+            color: #333;
+            pointer-events: none;
+        }
+
+        .form-control.textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 768px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-details {
+                grid-template-columns: 1fr;
+            }
+
+           
+        }
+
+        /* Service History Styles */
+        .history-section {
+        padding: 20px;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .history-title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .history-badge {
+        background-color: #FF8C00;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 1.2rem;
+        display: inline-block;
+    }
+
+    .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .history-table th {
+        background-color: #f8f9fa;
+        padding: 12px;
+        text-align: left;
+        font-weight: 500;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .history-table td {
+        padding: 12px;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .history-table tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    .status-badge {
+        background-color: #FF8C00;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        display: inline-block;
+    }
+
+    .status-badge.accepted {
+        background-color: #FF8C00;
+    }
+
+    .status-badge.rejected {
+        background-color: #FF8C00;
+    }
+
+    @media (max-width: 768px) {
+        .history-table {
+            font-size: 14px;
+        }
+
+        .history-table td, 
+        .history-table th {
+            padding: 8px;
+        }
+
+        .status-badge {
+            padding: 3px 8px;
+            font-size: 0.8rem;
+        }
+    }
+
+        /* Support Section Styles */
+        .support-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .support-card h3 {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1000;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="/placeholder.svg?height=40&width=120" alt="GoHelp Logo">
+            </div>
+            <% for (let pro of provides) { %>
+              <% if (pro.emailaddress === employmail) { %>
+            <div class="profile-section">
+                <img src="<%= pro.uploadimage?.url %>" class="profile-image" alt="">
+                <h3><%= pro.fullname %></h3>
+                <p><%= pro.emailaddress %></p>
+            </div>
+         <% } %>
+       <% } %>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item active" data-section="dashboard">
+                        <span class="icon">□</span>
+                        Dashboard
+                    </li>
+                    <li class="nav-item" data-section="profile">
+                        <span class="icon">○</span>
+                        Profile
+                    </li>
+                    <li class="nav-item" data-section="history">
+                        <span class="icon">□</span>
+                        Service Order History
+                    </li>
+                    <li class="nav-item" data-section="support">
+                        <span class="icon">?</span>
+                        Support & Help
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header" style="z-index: 10;">
+                <button id="menuToggle" class="menu-toggle">☰</button>
+                <div class="user-info">
+                    <span>My Name</span>
+                    <span>→</span>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <h1 class="page-title">Dashboard</h1>
+                <h2 class="section-title">Service Order</h2>
+
+                <div class="service-grid">
+                 <% for(let req of request){ %>
+                 <% if(req.emailaddress === employmail){%>
+
+                  
+                  
+                    <div class="service-card">
+                        <span class="provider-name"><%= req.usernames %></span>
+                        <div class="service-details">
+                            <p><strong>Service:</strong> <%= req.userservice %></p>
+                            <p><strong>Location:</strong><%= req.useraddress %></p>
+                        </div>
+                        <div class="card-actions">
+                          
+                            <a class="btn btn-reject" href="/employlogin/<%= employmail %>/<%=req._id%>?action=accept">Accept</a>
+                            <a class="btn btn-accept" href="/employlogin/<%= employmail %>/<%=req._id%>?action=reject">Reject</a>
+                        </div>
+                    </div>
+                 <% } %>
+                  <%}%>
+                  </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="content-section">
+                <div class="profile-container">
+                    <div class="profile-badge">Profile</div>
+                    
+                    <div class="profile-content">
+                        
+                    <%  for(let pro of provides){ %>
+                      <%  if(pro.emailaddress === employmail){ %>
+                        <div class="profile-details">
+                            <div class="form-group">
+                                <label for="fullName">Full Name:</label>
+                                <input type="text" id="fullName" class="form-control" value="<%= pro.fullname %>" readonly>
+                            </div>
+            
+                            <div class="form-group">
+                                <label for="contactNumber">Contact Number:</label>
+                                <input type="text" id="contactNumber" class="form-control" value="<%= pro.contactnumber %>" readonly>
+                            </div>
+            
+                            <div class="form-group">
+                                <label for="email">Email Address:</label>
+                                <input type="email" id="email" class="form-control" value="<%= pro.emailaddress %>" readonly>
+                            </div>
+            
+                            <div class="form-group">
+                                <label for="address">Residential Address:</label>
+                                <textarea id="address" class="form-control textarea" readonly><%=pro.city%></textarea>
+                            </div>
+            
+                            <div class="form-group">
+                                <label for="service">Service Offered:</label>
+                                <input type="text" id="service" class="form-control" value="<%=pro.category%>" readonly>
+                            </div>
+            
+                            <div class="form-group">
+                                <label for="govId">Government ID Number:</label>
+                                <input type="text" id="govId" class="form-control" value="<%=pro.adharcard%>" readonly>
+                            </div>
+            
+                            <div class="form-group">
+                                <label for="workHours">Work Hours/Days:</label>
+                                <input type="text" id="workHours" class="form-control" value="<%=pro.workhour%>" readonly>
+                            </div>
+            
+                            <div class="form-group full-width">
+                                <label for="locations">Experience(year)</label>
+                                <input type="text" id="locations" class="form-control" value="<%=pro.experience%>" readonly>
+                            </div>
+                        </div>
+                  <%    } %>
+                 <%  } %>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Service History Section -->
+            <section id="history" class="content-section">
+                <section class="history-section">
+                    <div class="history-title">
+                        <span class="history-badge">Service Order History</span>
+                    </div>
+                    
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Sr no.</th>
+                                <th>Name</th>
+                                <th>Service</th>
+                                <th>Mobile No</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <% let count = 1; %> <!-- Declare count outside the loop -->
+                          <% for (let req of request) { %>
+                            <% if (req.emailaddress === employmail) { %>
+                              <% 
+                                const now = new Date();
+                                const formattedTime = now.toLocaleString('en-GB', {
+                                  day: '2-digit',
+                                  month: '2-digit',
+                                  year: '2-digit',
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                  hour12: true
+                                });
+                              %>
+                              <tr>
+                                <td><%= count %></td>
+                                <td><%= req.usernames %></td>
+                                <td><%= req.userservice %></td>
+                                <td><%= req.usermobile %></td>
+                                <td><%= formattedTime %></td> <!-- Print formatted time -->
+                                <td><span class="status-badge accepted"><%= req.status %></span></td>
+                              </tr>
+                              <% count += 1; %> <!-- Increment count here -->
+                            <% } %>
+                          <% } %>
+                          
+                          
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+
+            <!-- Support Section -->
+            <section id="support" class="content-section">
+                <h1 class="page-title">Support & Help</h1>
+                <div class="support-card">
+                    <h3>Contact Support</h3>
+                    <p>Email: support@gohelp.com</p>
+                    <p>Phone: 1-800-GOHELP</p>
+                </div>
+                <div class="support-card">
+                    <h3>FAQs</h3>
+                    <p>Find answers to commonly asked questions about our services.</p>
+                    <button class="btn btn-accept">View FAQs</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Mobile menu toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // Section navigation functionality
+        const navItems = document.querySelectorAll('.nav-item');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Update active nav item
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+
+                // Show corresponding section
+                const sectionId = item.dataset.section;
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === sectionId) {
+                        section.classList.add('active');
+                    }
+                });
+
+                // Close mobile menu after selection
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        });
+
+        // Handle accept/reject buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            if (button.classList.contains('btn-reject') || button.classList.contains('btn-accept')) {
+                button.addEventListener('click', function() {
+                    const action = this.classList.contains('btn-accept') ? 'accepted' : 'rejected';
+                    const card = this.closest('.service-card');
+                    if (card) {
+                        const providerName = card.querySelector('.provider-name').textContent;
+                        alert(`Service request ${action} for ${providerName}`);
+                        card.style.opacity = '0.5';
+                        card.style.pointerEvents = 'none';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
