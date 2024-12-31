@@ -116,6 +116,12 @@
   <div class="login-card">
     <div class="login-form">
         <h1><span class="login-title">Login</span></h1>
+        <% if (error_msg.length > 0) { %>
+            <div style="color: red;"><%= error_msg %></div>
+        <% } %>
+        <% if (success_msg.length > 0) { %>
+            <div style="color: green;"><%= success_msg %></div>
+        <% } %>
         <form>
             <div class="input-group">
                 <label for="username">Username</label>
@@ -132,8 +138,7 @@
             <button  class="login-button">Login</button>
         </form>
         <div class="links">
-            <a href="/forget">Forgot Password</a>
-            <a href="#">New to GoHelp ? Create an Account</a>
+            <a href="/signup">New to GoHelp ? Create an Account</a>
         </div>
     </div>
     <div class="login-image">

@@ -18,6 +18,7 @@ const { storage } = require("./cloudConfig.js");
 const upload = multer({ storage });
 const Employ = require("./views/employSchema.js");
 const Request = require("./views/order.js");
+const flash = require('connect-flash');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -25,6 +26,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public")));
+
+const URL = process.env.URL;
 
 main()
   .then(() => {
@@ -35,12 +38,12 @@ main()
   });
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/gohelp");
+  await mongoose.connect(URL);
 }
 
 const getsession = app.use(
   session({
-    secret: "myrule",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 },
@@ -48,6 +51,12 @@ const getsession = app.use(
 );
 
 app.use(session(getsession));
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.success_msg = req.flash('success_msg');
+  next();
+});
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -64,22 +73,43 @@ app.get("/signup", (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-  const { username, email, password } = req.body;
-  const newuser = new User({ username, email });
-  const result = await User.register(newuser, password);
-  res.redirect("/login");
-});
-app.get("/login", (req, res) => {
-  res.render("login.ejs");
-});
+  const {username,email,password} = req.body;
+    
+   try {
+       // Check if email is already registered
+       const existingUser  = await User.findOne({email:email });
+       const existingUsername  = await User.findOne({username:username });
+       if (existingUser || existingUsername ) {
+           req.flash('error_msg', 'Already exists. Please choose another.');
+           return res.redirect('/signup');
+       }
+ 
+       // Register new user
+       const newUser  = new User({ username, email });
+       await User.register(newUser , password);
+ 
+       // Redirect to login page on successful registration
+       req.flash('success_msg', 'Registration successful! Please log in.');
+       res.redirect('/login');
+   } catch (err) {
+       console.error("Error during registration:", err);
+       req.flash('error_msg', 'An error occurred. Please try again.');
+       res.redirect('/signup');
+   }
+ });
+ app.get("/login", (req,res) => {
+  const error_msg = req.flash('error');
 
+  // Render the login form and pass the error message to the view
+  res.render('login.ejs', { error_msg: error_msg });
+})
 app.post(
-  "/login",
-  passport.authenticate("local", { failureRedirect: "/login" }),
-  async (req, res) => {
-    const {username} = req.body;
-    res.redirect(`/main/${encodeURIComponent(username)}`);
-  }
+"/login",
+passport.authenticate("local", { failureRedirect: "/login" ,failureFlash:'Invalid username or password'}),
+async (req, res) => {
+  const {username} = req.body;
+  res.redirect(`/main/${encodeURIComponent(username)}`);
+}
 );
 
 
@@ -123,18 +153,47 @@ app.get("/main/serviceprovider", async (req, res) => {
 });
 app.get("/main/:username", async (req, res) => {
   const user = await User.find();
+  const request = await Request.find();
+  const provides = await Provider.find();
   const {username} = req.params;
-  res.render("main.ejs", { user,username});
+  for(let use of user){
+    if(use.username === username){
+      const email = use.email
+      res.render("main.ejs", { user,username,email,request,provides});
+    }
+  }
+  
 });
 app.get("/employeesignup", (req, res) => {
   res.render("employeesignup.ejs");
 });
 app.post("/employeesignup", async (req, res) => {
   const { employname, employmail, employpassword } = req.body;
-  const newemploy = new Employ({ employname, employmail, employpassword });
+      
+try {
+  // Check if email is already registered
+  const existingEmploy  = await Employ.findOne({employname:employname });
+  const existingEmpname  = await Employ.findOne({employmail:employmail });
+  if (existingEmploy || existingEmpname ) {
+      req.flash('error_msg', 'Username or Email Already exists. Please choose another.');
+      return res.redirect('/employeesignup');
+  }
+
+  // Register new user
+  const newemploy = new Employ({ employname, employmail,employpassword});
+  
   await newemploy.save();
-  console.log(newemploy);
-  res.redirect("/employeelogin");
+
+  
+
+  // Redirect to login page on successful registration
+  req.flash('success_msg', 'Registration successful! Please log in.');
+  res.redirect('/employeelogin');
+} catch (err) {
+  console.error("Error during registration:", err);
+  req.flash('error_msg', 'An error occurred. Please try again.');
+  res.redirect('/employeesignup');
+}  
 });
 app.get("/employeelogin", (req, res) => {
   res.render("employeelogin.ejs");
@@ -151,10 +210,14 @@ app.post("/employeelogin", async (req, res) => {
       employpassword: password,
     });
     if (!employ) {
-      res.send("invalid credentials");
+      
+      req.flash('error_msg', 'Invalid email or password');
+  res.redirect('/employeelogin');
     } else {
       const provider = await Provider.findOne({ emailaddress: employmail });
+ 
       if (!provider) {
+        
         res.render("serviceprovider.ejs");
       } else {
         const provides = await Provider.find();
@@ -166,8 +229,41 @@ app.post("/employeelogin", async (req, res) => {
     console.error("Error during authentication:", error);
   }
 });
+// app.get("/aggriment/:email",async(req,res) =>{
+//   const email = req.params.email;
+//   const employ = await Employ.find();
+//   for(let emp of employ){
+//     if(emp.employmail === email) {
+//       res.redirect("/serviceinput")
+//     }else{
+//       res.redirect("/employsignup")
+//     }
+//   }
+//});
+
+app.get("/aggriment/:email", async (req, res) => {
+  const email = req.params.email;
+  
+  try {
+    // Find an employee with the matching email
+    const employee = await Employ.findOne({ employmail: email });
+
+    if (employee) {
+      // Redirect to service input if employee exists
+      return res.redirect("/serviceinput");
+    } else {
+      // Redirect to employee signup if no match found
+      return res.redirect("/employeesignup");
+    }
+  } catch (err) {
+    console.error("Error fetching employee:", err);
+    res.status(500).send("Server Error");
+  }
+});
 
 app.get("/serviceinput", async (req, res) => {
+  const username = req.params;
+  console.log(username);
   res.render("serviceinput.ejs");
 });
 
@@ -191,32 +287,40 @@ app.post(
       workhour,
       adharcard,
     } = req.body;
-
+    const Emailaddress  = await Employ.findOne({employmail:emailaddress });
+    const Email=await Provider.findOne({emailaddress:emailaddress});
+    
+    if(Emailaddress && !Email){
+      const newprovider = new Provider({
+        fullname,
+        contactnumber,
+        emailaddress,
+        city,
+        category,
+        experience,
+        workhour,
+        adharcard,
+        uploadimage,
+      });
+      
+      await newprovider.save();
+      const provides = await Provider.find();
+      const request = await Request.find();
+      res.render("providerdashbord.ejs",{employmail,provides,request});
+    }
+    else if(Email){
+      req.flash('error_msg', 'Email Already Exist Enter Email Same As Login Email');
+      res.redirect('/serviceinput');
+    }
+    else {
     //   const  {uploadimage} = CLOUDINARY_URL;
-    const newprovider = new Provider({
-      fullname,
-      contactnumber,
-      emailaddress,
-      city,
-      category,
-      experience,
-      workhour,
-      adharcard,
-      uploadimage,
-    });
-    await newprovider.save();
-    const provides = await Provider.find();
-    const request = await Request.find();
-    res.render("providerdashbord.ejs",{employmail,provides,request});
+    req.flash('error_msg', 'Please Enter Same As Login Email.');
+    res.redirect('/serviceinput');
     //console.log(req.file);
   }
+  
+}
 );
-//   app.get("/employeelogins", (req,res) => {
-//     res.render("outemployeelogin.ejs");
-//   })
-// app.post("/employeelogins",passport.authenticate("local",{failureRedirect:'/employeelogins'}), (req,res) => {
-//     res.render("providerdashbord.ejs");
-//   });
 
 app.get("/main/:username/scrapcollection/:emailaddress", async(req,res) => {
   const {username} = req.params;

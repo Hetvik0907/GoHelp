@@ -425,6 +425,10 @@
                 left: 0;
             }
         }
+        .hidden {
+    display: none; /* This ensures the element is removed from the layout */
+}
+
     </style>
 </head>
 <body>
@@ -482,10 +486,11 @@
 
                 <div class="service-grid">
                  <% for(let req of request){ %>
-                 <% if(req.emailaddress === employmail){%>
+                 <% if(req.emailaddress === employmail && req.status === "Pending"){%>
+                
 
-                  
-                  
+                    
+
                     <div class="service-card">
                         <span class="provider-name"><%= req.usernames %></span>
                         <div class="service-details">
@@ -494,10 +499,11 @@
                         </div>
                         <div class="card-actions">
                           
-                            <a class="btn btn-reject" href="/employlogin/<%= employmail %>/<%=req._id%>?action=accept">Accept</a>
-                            <a class="btn btn-accept" href="/employlogin/<%= employmail %>/<%=req._id%>?action=reject">Reject</a>
+                            <a class="btn btn-reject" href="/employlogin/<%= employmail %>/<%=req._id%>?action=reject">Reject</a>
+                            <a class="btn btn-accept" href="/employlogin/<%= employmail %>/<%=req._id%>?action=accept">Accept</a>
                         </div>
                     </div>
+             
                  <% } %>
                   <%}%>
                   </div>
@@ -581,6 +587,7 @@
                         <tbody>
                           <% let count = 1; %> <!-- Declare count outside the loop -->
                           <% for (let req of request) { %>
+                            
                             <% if (req.emailaddress === employmail) { %>
                               <% 
                                 const now = new Date();
@@ -663,21 +670,24 @@
             });
         });
 
-        // Handle accept/reject buttons
         document.querySelectorAll('.btn').forEach(button => {
-            if (button.classList.contains('btn-reject') || button.classList.contains('btn-accept')) {
-                button.addEventListener('click', function() {
-                    const action = this.classList.contains('btn-accept') ? 'accepted' : 'rejected';
-                    const card = this.closest('.service-card');
-                    if (card) {
-                        const providerName = card.querySelector('.provider-name').textContent;
-                        alert(`Service request ${action} for ${providerName}`);
-                        card.style.opacity = '0.5';
-                        card.style.pointerEvents = 'none';
-                    }
-                });
+    if (button.classList.contains('btn-reject') || button.classList.contains('btn-accept')) {
+        button.addEventListener('click', function() {
+            const action = this.classList.contains('btn-accept') ? 'accepted' : 'rejected';
+            const card = this.closest('.service-card');
+
+            if (card) {
+                const providerName = card.querySelector('.provider-name').textContent;
+                alert(`Service request ${action} for ${providerName}`);
+                
+                // Add 'hidden' class to hide the card
+                // card.classList.add('hidden');
             }
         });
+    }
+});
+
+
     </script>
 </body>
 </html>

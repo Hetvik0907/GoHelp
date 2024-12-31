@@ -1230,12 +1230,18 @@
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td>1.</td>
-          <td>Rohit Bhatt</td>
-          <td>Handyman Service</td>
-          <td>9865324556</td>
-          <td><span class="status status-pending">Pending</span></td>
+    <% let count = 1 %>
+   <% for(let req of request){ %>
+   <% for(let pro of provides){  %>
+
+    
+    <%  if(req.username== username && req.emailaddress == pro.emailaddress){  %>
+        <tr>
+          <td><%= count %></td>
+          <td><%=pro.fullname %></td>
+          <td><%=req.userservice%></td>
+          <td><%=pro.contactnumber%></td>
+          <td><span class="status status-pending"><%=req.status%></span></td>
           <td>
               <button class="chat-button">
                   <svg class="chat-icon" viewBox="0 0 24 24">
@@ -1244,21 +1250,12 @@
               </button>
           </td>
       </tr>
-      <tr>
-          <td>2.</td>
-          <td>Dharmesh Garg</td>
-          <td>Scrap Collection Service</td>
-          <td>8495758696</td>
-          <td><span class="status status-confirmed">Confirmed</span></td>
-          <td>
-              <button class="chat-button">
-                  <svg class="chat-icon" viewBox="0 0 24 24">
-                      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-                  </svg>
-              </button>
-          </td>
-      </tr>
-  </tbody>
+      <% count += 1 %>
+   <%   } %>
+    <% } %>
+  <%  } %> 
+   
+        </tbody>
 </table>
 </section>
 
@@ -1359,7 +1356,8 @@
     <div class="cta-buttons">
 
       <!-- /main/serviceprovider -->
-      <a href="#" class="btn btn-primary">Start Earning Today</a> 
+      <a href="/aggriment/<%=email%>" class="btn btn-primary">Start Earning Today</a> 
+       <!-- <a href="/aggriment/<%=email%>" class="btn btn-primary"></a> -->
     </div>
 
   </section>
@@ -1556,7 +1554,7 @@ const acceptAgreementBtn = document.getElementById('accbtn');
     acceptAgreementBtn.addEventListener('click', () => {
         if (agreeCheckbox.checked && agreeCheckbox2.checked) {
             // Redirect to the target page
-            window.location.href = "/serviceinput";
+            window.location.href = "/serviceinput/";
         } else {
             alert("Please agree to the terms and conditions before proceeding.");
         }

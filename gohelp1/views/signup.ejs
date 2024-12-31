@@ -134,6 +134,9 @@
     <div class="form-section">
         <div class="header">
             <span class="header-text">Sign Up</span>
+            <% if (error_msg.length > 0) { %>
+                <div style="color: red;"><%= error_msg %></div>
+            <% } %>
         </div>
         <form>
             <div class="input-group">
@@ -150,7 +153,7 @@
             </div>
             <button type="submit" class="signup-button">Sign Up</button>
             <div class="login-link">
-                Already have an Account? <a href="#">Login</a>
+                Already have an Account? <a href="/login">Login</a>
             </div>
         </form>
     </div>
