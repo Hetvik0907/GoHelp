@@ -1,20 +1,17 @@
 {
-  
-    "engines":{
-      "node":"20.15.0"
-    
-    },
-  
+  "engines": {
+    "node": "20.15.0"
+  },
   "name": "gohelp",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",   // Add a start script to run the application
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "hetvik",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
@@ -31,5 +28,7 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0"
-  }
+  },
+  "devDependencies": {},
+  "description": "A Node.js application for GoHelp project"
 }
