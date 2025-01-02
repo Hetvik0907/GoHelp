@@ -11,6 +11,7 @@
     "keywords": [],
     "author": "hetvik",
     "license": "ISC",
+
     "dependencies": {
         "bcrypt": "^5.1.1",
         "bcryptjs": "^2.4.3",
@@ -28,5 +29,13 @@
         "passport-local": "^1.0.0",
         "passport-local-mongoose": "^8.0.0"
     },
-    "description": "A Node.js application for GoHelp project"
+    
+
+      
+
+
+ 
+  "devDependencies": {},
+  "description": "A Node.js application for GoHelp project"
+
 }
