@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "engines": {
     "node": "20.15.0"
     },
@@ -12,23 +11,10 @@
     "keywords": [],
     "author": "hetvik", 
     "license": "ISC",
-    "dependencies": {   
-=======
-  "engines": {
-    "node": "20.15.0"
-  },
-  "name": "gohelp",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",   
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "hetvik",
-  "license": "ISC",
+      
+
+
   "dependencies": {
->>>>>>> 6609e4203a77479e2d0e2b7663b789052e8dd885
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3", 
     "cloudinary": "^1.41.3", 
@@ -44,13 +30,10 @@
     "passport": "^0.7.0", 
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0"
-<<<<<<< HEAD
+
     },
-    "devDependencies": {},
-    "description": ""
-=======
-  },
+ 
   "devDependencies": {},
   "description": "A Node.js application for GoHelp project"
->>>>>>> 6609e4203a77479e2d0e2b7663b789052e8dd885
+
 }
