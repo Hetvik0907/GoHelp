@@ -1030,6 +1030,13 @@
             .hero{
               display: none;
             }
+            .serviceask{
+              display: none;
+            }
+            .contactbtn{
+              display: none;
+              
+            }
           
         }
 
@@ -1067,6 +1074,9 @@
 }
 .height{
   height: 78vh;
+}
+.heightt{
+  height: 0px;
 }
 
 /* ===============your orders ====================== */
@@ -1149,7 +1159,7 @@
       <li><a href="#" class="hbtn">Home</a></li>
       <li><a href="#serviceSection" class="sbtn">Services</a></li>
       <li><a href="#askservice" class="spbtn">Become Service Provider</a></li>
-      <li><a href="#contactUs">Contact</a></li>
+      <li><a href="#contactUs" class="contactbtn">Contact</a></li>
       <li><a href="#" class="ybtn">Your Orders</a></li>
       <li class="profile-dropdown">
         <a href="#" id="profileLink">My Profile</a>
@@ -1322,7 +1332,6 @@
     </div>
   </section>
 
-
   <section class="services-section" id="serviceSection">
     <div class="custom-shape-divider-top-1734811278" style="z-index: 10;">
       <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -1373,12 +1382,16 @@
             <h2 class="os-service-title">Handyman services</h2>
             <a href="/main/<%= username %>/handymanservice" class="os-view-more">View More</a>
           </div>
+
         </div>
       </div>
 
     </div>
   </section>
+<section class="home-section hidden" style="height:925px; width:425px; border: 2px solid black;">
+  THis Is Home Section
 
+</section>
 
 
   <section class="serviceask" id="askservice">
@@ -1415,7 +1428,7 @@
       </p>
     </section>
 
-
+<section class="contactus-section">
     <div class="services-header" style="margin-bottom: 0px; margin-top: 4rem" id="contactUs">
       <h2>Contact Us</h2>
     </div>
@@ -1456,7 +1469,7 @@
       </div>
     </div>
 
-
+  </section>
 
     
   </section>
@@ -1602,6 +1615,45 @@ const acceptAgreementBtn = document.getElementById('accbtn');
                 alert(`Opening chat with ${name}`);
             });
         });
+
+        const homesection = document.querySelector('.home-section');
+        const footersection = document.querySelector('.footer-section');
+        const copyright = document.querySelector('.copyright');
+        const contactussection = document.querySelector('.contactus-section');
+        const contactheight = document.querySelector('.contact-container');
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+        if(window.matchMedia('(max-width: 768px)').matches){
+          footersection.classList.add('hidden');
+          copyright.classList.add('hidden');
+          homesection.click();
+
+          hbtn.addEventListener("click",function(){
+            // home.classList.remove('hidden');
+            contactussection.classList.add('hidden');
+    service.classList.add('hidden');
+    provider.classList.add('hidden');
+    about.classList.add('hidden');
+    // lastdiv.classList.remove('height');
+    order.classList.add('hidden');
+    Aggrement.classList.add('hidden');
+    homesection.classList.remove('hidden');
+   
+          })
+
+          sbtn.addEventListener("click" ,function(){
+            home.classList.add('hidden');
+            contactussection.classList.add('hidden');
+            contactheight.classList.add('heightt');
+    service.classList.remove('hidden');
+    provider.classList.add('hidden');
+    about.classList.add('hidden');
+    // lastdiv.classList.remove('height');
+    order.classList.add('hidden');
+    Aggrement.classList.add('hidden');
+    homesection.classList.add('hidden');
+          })
+        }
 
   </script>
 
