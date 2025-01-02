@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>GoHelp</title>
 </head>
 <style>
   * {
@@ -852,13 +852,30 @@
 
   @media (max-width: 768px) {
     .os-services-grid {
-      grid-template-columns: 1fr;
+      grid-template-rows: 2fr;
       gap: 1.5rem;
     }
-
+      .os-service-card{
+        width: 150px;
+        height: 180px;
+      
+      }
+      .services-header{
+        font-size: 2rem;
+        position: absolute;
+        top: 35px;
+        right: 169px;
+      }
+      .os-service-card h2 {
+      font-size: 13px;
+      }
+      .os-view-more{
+        font-size: 10px;
+        padding: 5px;
+      }
     .os-service-image {
-      width: 150px;
-      height: 150px;
+      width: 50px;
+      height: 50px;
     }
   }
 
@@ -992,12 +1009,28 @@
             line-height: 1.6;
             margin-bottom: 1rem;
         }
-
+        
         @media (max-width: 768px) {
             .sp-container {
                 margin: 1rem;
                 padding: 0.5rem;
             }
+            .logo{
+              display: none;
+            }
+            .spbtn{
+              display: none;
+            }
+            .navbar{
+              position: fixed;
+              z-index: 30;
+              bottom: 0;
+              width: 100%;
+            }
+            .hero{
+              display: none;
+            }
+          
         }
 
         .sp-checkbox-group {
@@ -1315,7 +1348,7 @@
           <div class="os-service-card">
             <img src="/images/scrap.jpg" alt="Scrap Collecting" class="os-service-image">
             <h2 class="os-service-title">Scrap Collecting</h2>
-            <a href="/main/<%= username %>/scrapcollection" class="os-view-more">View More</a>
+            <a href="/main/<%= username %>/scrapcollection" class="os-view-more" >Viewmore</a>
           </div>
 
           <div class="os-service-card">

@@ -11,7 +11,6 @@ const session = require("express-session");
 const passport = require("passport");
 const localstrategy = require("passport-local");
 const getdata = require("./views/getSchema.js");
-const forget = require("./views/forget.js");
 const Provider = require("./views/form.js");
 const multer = require("multer");
 const { storage } = require("./cloudConfig.js");
