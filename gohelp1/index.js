@@ -63,6 +63,10 @@ passport.use(new localstrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.get("/",(req,res)=>{
+res.redirect("/gohelp");
+});
+
 app.get("/gohelp", (req, res) => {
   res.render("landing.ejs");
 });
