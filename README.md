@@ -37,7 +37,7 @@ GoHelp is a service management platform that allows users to request services fr
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/gohelp.git
+   git clone https://github.com/Hetvik0907/gohelp.gi
    cd gohelp
    ```
 
@@ -48,7 +48,7 @@ GoHelp is a service management platform that allows users to request services fr
 
 3. Set up environment variables by creating a `.env` file in the root directory:
    ```env
-   PORT=3000
+   PORT=8080
    MONGO_URI=your_mongodb_connection_string
    SESSION_SECRET=your_session_secret
    CLOUDINARY_URL=your_cloudinary_url
@@ -59,7 +59,7 @@ GoHelp is a service management platform that allows users to request services fr
    npm start
    ```
 
-5. Visit the application at [http://localhost:3000](http://localhost:3000).
+5. Visit the application at [http://localhost:8080](http://localhost:3000).
 
 ---
 
