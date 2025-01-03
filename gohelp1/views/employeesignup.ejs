@@ -11,20 +11,18 @@
       padding: 0;
       box-sizing: border-box;
       font-family: Arial, sans-serif;
-  }
+    }
 
-  body {
+    body {
       background-color: #fdf6e9;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-  }
+      padding: 20px;
+    }
 
-  .signup-card {
-    position: absolute;
-    left: 350px;
-    top: 125px;
+    .signup-card {
       background: white;
       border-radius: 32px;
       padding: 32px;
@@ -33,54 +31,54 @@
       display: flex;
       gap: 32px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+    }
 
-  .form-section {
+    .form-section {
       flex: 1;
-  }
+    }
 
-  .image-section {
+    .image-section {
       flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-  }
+    }
 
-  .header {
+    .header {
       text-align: center;
       margin-bottom: 32px;
-  }
+    }
 
-  .header-text {
+    .header-text {
       background-color: #f97316;
       color: white;
       padding: 8px 24px;
       border-radius: 9999px;
       display: inline-block;
       font-size: 1.25rem;
-  }
+    }
 
-  .input-group {
+    .input-group {
       margin-bottom: 20px;
-  }
+    }
 
-  .input-group label {
+    .input-group label {
       display: block;
       margin-bottom: 8px;
       font-size: 14px;
       color: #333;
-  }
+    }
 
-  .input-group input {
+    .input-group input {
       width: 100%;
       padding: 12px;
       border: none;
       background-color: #f3f4f6;
       border-radius: 8px;
       font-size: 14px;
-  }
+    }
 
-  .signup-button {
+    .signup-button {
       width: 100%;
       padding: 12px;
       background-color: #f97316;
@@ -90,43 +88,48 @@
       cursor: pointer;
       font-size: 16px;
       margin-bottom: 20px;
-  }
+    }
 
-  .signup-button:hover {
+    .signup-button:hover {
       background-color: #ea580c;
-  }
+    }
 
-  .login-link {
+    .login-link {
       text-align: center;
       font-size: 14px;
       color: #666;
-  }
+    }
 
-  .login-link a {
+    .login-link a {
       color: #f97316;
       text-decoration: none;
-  }
+    }
 
-  .login-link a:hover {
+    .login-link a:hover {
       text-decoration: underline;
-  }
-  img {
-    width: 300px;
-    height: 300px;
-    border-radius:30px;
-  }
+    }
 
-  @media (max-width: 768px) {
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 30px;
+    }
+
+    @media (max-width: 768px) {
       .signup-card {
-          flex-direction: column;
-          max-width: 400px;
-          margin: 20px;
+        flex-direction: column;
+        max-width: 100%;
       }
 
       .image-section {
-          display: none;
+        order: -1;
+        margin-bottom: 20px;
       }
-  }
+
+      .image-section img {
+        max-width: 100%;
+      }
+    }
 </style>
 <body>
   <form action="/employeesignup" method="post">
@@ -158,7 +161,7 @@
           </form>
       </div>
       <div class="image-section">
-          <img src="/images/Rectangle 16.png" alt="Service Illustration" width="300" height="300">
+          <img src="/images/Rectangle 16.png" alt="Service Illustration" >
       </div>
   </div>
   </form>

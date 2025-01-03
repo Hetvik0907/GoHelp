@@ -378,21 +378,7 @@
         background-color: #FF8C00;
     }
 
-    @media (max-width: 768px) {
-        .history-table {
-            font-size: 14px;
-        }
-
-        .history-table td, 
-        .history-table th {
-            padding: 8px;
-        }
-
-        .status-badge {
-            padding: 3px 8px;
-            font-size: 0.8rem;
-        }
-    }
+   
 
         /* Support Section Styles */
         .support-card {
@@ -590,6 +576,7 @@
                           <% for (let req of request) { %>
                             
                             <% if (req.emailaddress === employmail) { %> 
+                               
                               <tr>
                                 <td><%= count %></td>
                                 <td><%= req.usernames %></td>

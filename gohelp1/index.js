@@ -8,6 +8,7 @@ const path = require("path");
 const User = require("./views/loginschema.js");
 const methodOverride = require("method-override");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const localstrategy = require("passport-local");
 const getdata = require("./views/getSchema.js");
@@ -25,6 +26,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser());
 
 const URL = process.env.URL;
 
@@ -45,9 +47,19 @@ const getsession = app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 },
-  })
-);
+    cookie: { maxAge: 24 * 60 * 60 * 1000 },
+  }));
+
+  function checkLogin(req, res, next) {
+    const now = Date.now();
+    if (req.session.loggedIn && req.session.expiresAt > now) {
+        next(); // Continue if session is valid
+    } else {
+        req.session.destroy(); // Destroy expired session
+        res.redirect("/login"); // Redirect to login page
+    }
+}
+
 
 app.use(session(getsession));
 app.use(flash());
@@ -107,14 +119,26 @@ app.post("/signup", async (req, res) => {
   res.render('login.ejs', { error_msg: error_msg });
 })
 app.post(
-"/login",
-passport.authenticate("local", { failureRedirect: "/login" ,failureFlash:'Invalid username or password'}),
-async (req, res) => {
-  const {username} = req.body;
-  res.redirect(`/main/${encodeURIComponent(username)}`);
-}
-);
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureFlash: "Invalid username or password",
+  }),
+  async (req, res) => {
+    // Assuming req.user contains the authenticated user details
+    if (req.user) {
+      req.session.loggedIn = true;
+      req.session.user = req.user; // Save the authenticated user in the session
+      req.session.expiresAt = Date.now() + 24 * 60 * 60 * 1000; // 24-hour expiry
 
+      // Redirect to main page with the username
+      res.redirect(`/main/${encodeURIComponent(req.user.username)}`);
+    } else {
+      // Fallback in case of unexpected issues
+      res.redirect("/login");
+    }
+  }
+);
 
 app.post("/gohelp", async (req, res) => {
   const { getname, getemail, getsubject, getcomment } = req.body;
