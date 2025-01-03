@@ -394,14 +394,14 @@ app.get("/providerdashboard/:employmail" ,async(req,res) => {
   res.render("providerdashbord.ejs",{provides,request,employmail});
 })
 
-app.get("/main/:username/scrapcollection/:emailaddress", async(req,res) => {
-  const {username} = req.params;
-  const {emailaddress} = req.params;
-  console.log(username);
-  console.log(emailaddress);
-  const user = await User.find();
-  res.render("reqscrap.ejs", {user,username,emailaddress});
-});
+// app.get("/main/:username/scrapcollection/:emailaddress", async(req,res) => {
+//   const {username} = req.params;
+//   const {emailaddress} = req.params;
+//   console.log(username);
+//   console.log(emailaddress);
+//   const user = await User.find();
+//   res.render("reqscrap.ejs", {user,username,emailaddress});
+// });
 
 // app.get("/main/:username/WaterTankCleaning/:emailaddress", async(req,res) => {
 //   const {username} = req.params;
