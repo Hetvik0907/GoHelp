@@ -151,37 +151,23 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Source Outcome
 
+
 Below are the visual outcomes of the GoHelp project:
+![Screenshot 2025-01-03 124345](https://github.com/user-attachments/assets/505a32b6-92dd-46db-95c8-e12135b3e517)
 
-1. **Login Page**:
-   - A responsive login page for users and service providers.
-   ![Login Page](https://via.placeholder.com/800x400?text=Login+Page+Screenshot)
+![Screenshot 2025-01-03 124403](https://github.com/user-attachments/assets/ebcc7987-64a3-4279-821d-47ad16ca9018)
 
-2. **Dashboard**:
-   - A user dashboard showcasing pending and completed service requests.
-   ![Dashboard](https://via.placeholder.com/800x400?text=Dashboard+Screenshot)
+![Screenshot 2025-01-03 124556](https://github.com/user-attachments/assets/b6d22052-228b-451c-a5cd-aaa54c4c27ff)
 
-3. **Service Request Form**:
-   - A simple form to request services from providers.
-   ![Service Request Form](https://via.placeholder.com/800x400?text=Service+Request+Form+Screenshot)
+![Screenshot 2025-01-03 124531](https://github.com/user-attachments/assets/5a2d7618-1cc9-4cb7-a55c-c8aa63bfaf10)
 
-4. **Admin Panel**:
-   - A role-based admin panel to manage users and requests.
-   ![Admin Panel](https://via.placeholder.com/800x400?text=Admin+Panel+Screenshot)
+![Screenshot 2025-01-03 125118](https://github.com/user-attachments/assets/82f87f78-c71a-4531-8510-f99cb1972848)
 
-Add your screenshots to the `public/images` directory and update the paths above.
+![Screenshot 2025-01-03 125215](https://github.com/user-attachments/assets/bcd2567a-f0b2-497c-9f74-5690b8dbf68d)
 
-##Source Outcome
-below are the visual outcomes of the GoHelp project:
+![Screenshot 2025-01-03 125720](https://github.com/user-attachments/assets/79729f5a-9857-4552-a40c-8403c23f02b1)
 
--->Login Page:
-A responsive login page for users and service providers.
+![WhatsApp Image 2025-01-03 at 13 42 43_eeb98fa2](https://github.com/user-attachments/assets/40c841a9-105c-4d79-aa2d-4448a2892961)
+![WhatsApp Image 2025-01-03 at 13 42 45_7e14ca54](https://github.com/user-attachments/assets/264936c4-782e-4167-8936-66933086baed)
+![WhatsApp Image 2025-01-03 at 13 42 44_e109aff7](https://github.com/user-attachments/assets/e57667c5-69c0-4e41-ac55-7be2de51a4fe)
 
--->Dashboard:
-A user dashboard showcasing pending and completed service requests.
-
--->Service Request Form:
-A simple form to request services from providers.
-
--->Admin Panel:
-A role-based admin panel to manage users and requests.
