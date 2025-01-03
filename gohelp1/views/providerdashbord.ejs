@@ -418,7 +418,19 @@
         width: 17px;
         height: 17px;
 }
-
+#refreshImage {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    #refreshImage.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+.user-info{
+    display: flex;
+    gap: 15px;
+}
     </style>
 </head>
 <body>
@@ -465,8 +477,8 @@
             <header class="header" style="z-index: 10;">
                 <button id="menuToggle" class="menu-toggle">☰</button>
                 <div class="user-info">
-                    <span>My Name</span>
-                    <span>→</span>
+                    <img id="refreshImage" src="/images/avpuussql.webp" alt="Refresh">
+                    <a href="/employeelogin">LogOut</a>
                 </div>
             </header>
 
@@ -617,6 +629,21 @@
     </div>
 
     <script>
+        const logoutLink = document.querySelector('.user-info a[href="/employeelogin"]');
+
+logoutLink.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  // Clear session or local storage if used
+  sessionStorage.clear();
+  localStorage.clear();
+
+  // Redirect the user to the login page
+  window.location.href = '/gohelp';
+
+  // Replace history to prevent going back
+  window.history.replaceState(null, null, '/gohelp');
+});
         // Mobile menu toggle functionality
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.querySelector('.sidebar');
@@ -665,7 +692,18 @@
                 // card.classList.add('hidden');
             }
         });
-    }
+    }const refreshImage = document.getElementById("refreshImage");
+
+// Add click event listener to the image
+refreshImage.addEventListener("click", function () {
+  if (!refreshImage.classList.contains("disabled")) {
+    // Refresh the page
+    location.reload();
+
+    // Disable the image after the first click
+    refreshImage.classList.add("disabled");
+  }
+});
 });
 
 
