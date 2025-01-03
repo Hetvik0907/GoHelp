@@ -1642,6 +1642,7 @@
     </div>
   </section>
 <section class="home-section hidden" >
+
   <div class="gohelp-container">
     <header class="gohelp-header">
         <div class="gohelp-profile-wrapper">
@@ -1675,11 +1676,32 @@
         </div>
         <div class="gohelp-orders-container">
             <div class="gohelp-order-box">
-                <div class="gohelp-order-count">2</div>
+              <% 
+                let count1 = 0;
+                for(let req of request){
+                  if( username === req.username && req.status === "Pending"){
+                    count1 += 1;
+                  }
+                }
+               
+              
+            %>
+            
+            <div class="gohelp-order-count"><%= count1 %></div>
+            
                 <div class="gohelp-order-status">Pending</div>
             </div>
             <div class="gohelp-order-box">
-                <div class="gohelp-order-count">3</div>
+              <% 
+              let count2 = 0;
+              for(let req of request){
+                if( username === req.username && req.status === "Accepted"){
+                  count2 += 1;
+                }
+              }
+          
+          %>
+                <div class="gohelp-order-count"><%=count2%></div>
                 <div class="gohelp-order-status">Accepted</div>
             </div>
         </div>

@@ -134,7 +134,6 @@ app.post(
       // Redirect to main page with the username
       res.redirect(`/main/${encodeURIComponent(req.user.username)}`);
     } else {
-      // Fallback in case of unexpected issues
       res.redirect("/login");
     }
   }
