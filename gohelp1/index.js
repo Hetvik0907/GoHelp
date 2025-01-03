@@ -144,10 +144,51 @@ app.get("/main/:username/watertankcleaning", async (req, res) => {
   const provides = await Provider.find();
   res.render("watertankcleaning.ejs", { provides });
 });
-app.get("/main/:username/handymanservice", async (req, res) => {
+app.get("/main/:username/ElderlyCare", async (req, res) => {
   const provides = await Provider.find();
-  res.render("handymanservice.ejs", { provides });
+  res.render("ElderlyCare.ejs", { provides });
 });
+
+app.get("/main/:username/Electrical", async (req, res) => {
+  const provides = await Provider.find();
+  res.render("Electrical.ejs", { provides });
+});
+
+app.get("/main/:username/Plumbing", async (req, res) => {
+  const provides = await Provider.find();
+  res.render("Plumbing.ejs", { provides });
+});
+
+app.get("/main/:username/Painting", async (req, res) => {
+  const provides = await Provider.find();
+  res.render("Painting.ejs", { provides });
+});
+
+app.get("/main/:username/ApplianceRepair", async (req, res) => {
+  const provides = await Provider.find();
+  res.render("ApplianceRepair.ejs", { provides });
+});
+
+app.get("/main/:username/HomeRenovation", async (req, res) => {
+  const provides = await Provider.find();
+  res.render("HomeRenovation.ejs", { provides });
+});
+
+app.get("/main/:username/HomeSecuritySystem", async (req, res) => {
+  const provides = await Provider.find();
+  res.render("HomeSecuritySystem.ejs", { provides });
+});
+
+app.get("/main/:username/GuardService", async (req, res) => {
+  const provides = await Provider.find();
+  res.render("GuardService.ejs", { provides });
+});
+
+app.get("/main/:username/CateringService", async (req, res) => {
+  const provides = await Provider.find();
+  res.render("CateringService.ejs", { provides });
+});
+
 
 
 app.get("/main/serviceprovider", async (req, res) => {
@@ -307,9 +348,7 @@ app.post(
       });
       
       await newprovider.save();
-      const provides = await Provider.find();
-      const request = await Request.find();
-      res.render("providerdashbord.ejs",{employmail,provides,request});
+      res.redirect(`/providerdashboard/${employmail}`);
     }
     else if(Email){
       req.flash('error_msg', 'Email Already Exist Enter Email Same As Login Email');
@@ -325,6 +364,13 @@ app.post(
 }
 );
 
+app.get("/providerdashboard/:employmail" ,async(req,res) => {
+  const {employmail} = req.params;
+  const provides = await Provider.find();
+  const request = await Request.find();
+  res.render("providerdashbord.ejs",{provides,request,employmail});
+})
+
 app.get("/main/:username/scrapcollection/:emailaddress", async(req,res) => {
   const {username} = req.params;
   const {emailaddress} = req.params;
@@ -334,38 +380,37 @@ app.get("/main/:username/scrapcollection/:emailaddress", async(req,res) => {
   res.render("reqscrap.ejs", {user,username,emailaddress});
 });
 
-app.get("/main/:username/WaterTankCleaning/:emailaddress", async(req,res) => {
-  const {username} = req.params;
-  const {emailaddress} = req.params;
-  console.log(username);
-  console.log(emailaddress);
-  const user = await User.find();
-  res.render("reqwatertankcleaning.ejs", {user,username,emailaddress});
-});
-app.get("/main/:username/BabySitting/:emailaddress", async(req,res) => {
-  const {username} = req.params;
-  const {emailaddress} = req.params;
-  console.log(username);
-  console.log(emailaddress);
-  const user = await User.find();
-  res.render("reqbabysitting.ejs", {user,username,emailaddress});
-});
-app.get("/main/:username/HouseCleaning/:emailaddress", async(req,res) => {
-  const {username} = req.params;
-  const {emailaddress} = req.params;
-  console.log(username);
-  console.log(emailaddress);
-  const user = await User.find();
-  res.render("reqhousecleaning.ejs", {user,username,emailaddress});
-});
+// app.get("/main/:username/WaterTankCleaning/:emailaddress", async(req,res) => {
+//   const {username} = req.params;
+//   const {emailaddress} = req.params;
+//   console.log(username);
+//   console.log(emailaddress);
+//   const user = await User.find();
+//   res.render("reqwatertankcleaning.ejs", {user,username,emailaddress});
+// });
+// app.get("/main/:username/BabySitting/:emailaddress", async(req,res) => {
+//   const {username} = req.params;
+//   const {emailaddress} = req.params;
+//   console.log(username);
+//   console.log(emailaddress);
+//   const user = await User.find();
+//   res.render("reqbabysitting.ejs", {user,username,emailaddress});
+// });
+// app.get("/main/:username/HouseCleaning/:emailaddress", async(req,res) => {
+//   const {username} = req.params;
+//   const {emailaddress} = req.params;
+//   console.log(username);
+//   console.log(emailaddress);
+//   const user = await User.find();
+//   res.render("reqhousecleaning.ejs", {user,username,emailaddress});
+// });
 
-app.get("/main/:username/HandyManservice/:emailaddress", async(req,res) => {
+app.get("/main/:username/:category/:emailaddress", async(req,res) => {
   const {username} = req.params;
   const {emailaddress} = req.params;
-  console.log(username);
-  console.log(emailaddress);
+  const category = req.params.category;
   const user = await User.find();
-  res.render("reqhandyman.ejs", {user,username,emailaddress});
+  res.render("reqhandyman.ejs", {user,username,emailaddress,category});
 });
 
 app.post("/main/:username/:emailaddress", async (req, res) => {

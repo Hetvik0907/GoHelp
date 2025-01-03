@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>GoHelp</title>
 </head>
 <style>
@@ -877,6 +878,40 @@
       width: 50px;
       height: 50px;
     }
+    .header-button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+    table {
+        display: block;
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap;
+        border: none;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    th, td {
+        display: table-cell;
+        padding: 10px;
+        text-align: left;
+    }
+
+    tbody tr {
+        display: table-row;
+    }
+
+    tbody td {
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    .chat-icon {
+        width: 20px;
+        height: 20px;
+    }
   }
 
 
@@ -895,6 +930,7 @@
     border-radius: 5px;
     overflow: hidden;
     z-index: 1000;
+   
   }
 
   .dropdown-menu.active {
@@ -1144,6 +1180,174 @@
         .active a{
           color:#ff9800;
         }
+
+        .gohelp-container {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .gohelp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 24px;
+        }
+
+        .gohelp-profile-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .gohelp-profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        .gohelp-profile-name {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .gohelp-settings-icon {
+            width: 24px;
+            height: 24px;
+            color: #333;
+        }
+
+        .gohelp-hero-section {
+            background: #f0f0f0;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 32px;
+        }
+
+        .gohelp-hero-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .gohelp-explore-button {
+            background: #ff9933;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .gohelp-section-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .gohelp-orders-container {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .gohelp-order-box {
+            background: #eee;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .gohelp-order-count {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .gohelp-order-status {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .gohelp-view-more-link {
+            color: #ff9933;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 16px;
+        }
+
+        .gohelp-services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .gohelp-service-item {
+            text-align: center;
+        }
+
+        .gohelp-service-image {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 8px;
+        }
+
+        .gohelp-service-title {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .gohelp-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 360px) {
+            .gohelp-container {
+                padding: 12px;
+            }
+
+            .gohelp-hero-section {
+                padding: 20px;
+            }
+
+            .gohelp-hero-title {
+                font-size: 20px;
+            }
+
+            .gohelp-services-grid {
+                gap: 12px;
+            }
+
+            .gohelp-order-box {
+                padding: 12px;
+            }
+
+            .gohelp-order-count {
+                font-size: 20px;
+            }
+        }
+        .doubletoph{
+          margin-top: 100px;
+        }
+        .doubleboth{
+          margin-bottom: 100px;
+        }
 </style>
 
 <body>
@@ -1160,7 +1364,7 @@
       <li><a href="#serviceSection" class="sbtn">Services</a></li>
       <li><a href="#askservice" class="spbtn">Become Service Provider</a></li>
       <li><a href="#contactUs" class="contactbtn">Contact</a></li>
-      <li><a href="#" class="ybtn">Your Orders</a></li>
+      <li><a href="#orders" class="ybtn">Your Orders</a></li>
       <li class="profile-dropdown">
         <a href="#" id="profileLink">My Profile</a>
         <ul class="dropdown-menu" id="dropdownMenu">
@@ -1332,7 +1536,7 @@
     </div>
   </section>
 
-  <section class="services-section" id="serviceSection">
+  <section class="services-section" >
     <div class="custom-shape-divider-top-1734811278" style="z-index: 10;">
       <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path
@@ -1379,8 +1583,57 @@
           </div>
           <div class="os-service-card">
             <img src="/images/handyman.jpg" alt="handymanservice" class="os-service-image">
-            <h2 class="os-service-title">Handyman services</h2>
-            <a href="/main/<%= username %>/handymanservice" class="os-view-more">View More</a>
+            <h2 class="os-service-title">Electrical Service</h2>
+            <a href="/main/<%= username %>/Electrical" class="os-view-more">View More</a>
+          </div>
+
+          <div class="os-service-card">
+            <img src="/images/scrap.jpg" alt="Scrap Collecting" class="os-service-image">
+            <h2 class="os-service-title">Elderly Care</h2>
+            <a href="/main/<%= username %>/ElderlyCare" class="os-view-more" >View more</a>
+          </div>
+
+          <div class="os-service-card">
+            <img src="/images/scrap.jpg" alt="Scrap Collecting" class="os-service-image">
+            <h2 class="os-service-title">Plumbing Service</h2>
+            <a href="/main/<%= username %>/Plumbing" class="os-view-more" >View more</a>
+          </div>
+
+
+          <div class="os-service-card">
+            <img src="/images/scrap.jpg" alt="Scrap Collecting" class="os-service-image">
+            <h2 class="os-service-title">Painting Service</h2>
+            <a href="/main/<%= username %>/Painting" class="os-view-more" >View more</a>
+          </div>
+
+          <div class="os-service-card">
+            <img src="/images/scrap.jpg" alt="Scrap Collecting" class="os-service-image">
+            <h2 class="os-service-title">Appliance Repair</h2>
+            <a href="/main/<%= username %>/ApplianceRepair" class="os-view-more" >View more</a>
+          </div>
+
+          <div class="os-service-card">
+            <img src="/images/scrap.jpg" alt="Scrap Collecting" class="os-service-image">
+            <h2 class="os-service-title">Home Renovation</h2>
+            <a href="/main/<%= username %>/HomeRenovation" class="os-view-more" >View more</a>
+          </div>
+
+          <div class="os-service-card">
+            <img src="/images/scrap.jpg" alt="Scrap Collecting" class="os-service-image">
+            <h2 class="os-service-title">Home Security System</h2>
+            <a href="/main/<%= username %>/HomeSecuritySystem" class="os-view-more" >View more</a>
+          </div>
+
+          <div class="os-service-card">
+            <img src="/images/scrap.jpg" alt="Scrap Collecting" class="os-service-image">
+            <h2 class="os-service-title">Guard Service</h2>
+            <a href="/main/<%= username %>/GuardService" class="os-view-more" >View more</a>
+          </div>
+
+          <div class="os-service-card">
+            <img src="/images/scrap.jpg" alt="Scrap Collecting" class="os-service-image">
+            <h2 class="os-service-title">Catering Service</h2>
+            <a href="/main/<%= username %>/CateringService" class="os-view-more" >View more</a>
           </div>
 
         </div>
@@ -1388,9 +1641,86 @@
 
     </div>
   </section>
-<section class="home-section hidden" style="height:925px; width:425px; border: 2px solid black;">
-  THis Is Home Section
+<section class="home-section hidden" >
+  <div class="gohelp-container">
+    <header class="gohelp-header">
+        <div class="gohelp-profile-wrapper">
+            <div class="gohelp-profile-avatar"></div>
+            <span class="gohelp-profile-name">
+              <% for (let use of user){ %>
+              <%    if (use.username ===  username) { %>             
+               <a>
+                  <%= username %>
+               </a>
+              
+              
+             <% } %>
+             <% } %></span>
+        </div>
+        <svg class="gohelp-settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+        </svg>
+    </header>
 
+    <section class="gohelp-hero-section">
+        <h1 class="gohelp-hero-title">Need a hand at home?<br>GoHelp is just a call away!</h1>
+        <a href="#serviceSection" class="gohelp-explore-button">Explore Services →</a>
+    </section>
+
+    <section>
+        <div class="gohelp-header-row">
+            <h2 class="gohelp-section-header">My Orders</h2>
+            <a href="#" class="gohelp-view-more-link">View More →</a>
+        </div>
+        <div class="gohelp-orders-container">
+            <div class="gohelp-order-box">
+                <div class="gohelp-order-count">2</div>
+                <div class="gohelp-order-status">Pending</div>
+            </div>
+            <div class="gohelp-order-box">
+                <div class="gohelp-order-count">3</div>
+                <div class="gohelp-order-status">Accepted</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="gohelp-section-header">Top Services</h2>
+        <div class="gohelp-services-grid">
+            <div class="gohelp-service-item">
+                <img src="/images/houseclean.jpg" alt="House Cleaning" class="gohelp-service-image">
+                <div class="gohelp-service-title">House Cleaning</div>
+            </div>
+            <div class="gohelp-service-item">
+                <img src="/images/eldercsre.webp" alt="Elder Caring" class="gohelp-service-image">
+                <div class="gohelp-service-title">Elder Caring</div>
+            </div>
+            <div class="gohelp-service-item">
+                <img src="/images/watertank.jpg" alt="Watertank Cleaning" class="gohelp-service-image">
+                <div class="gohelp-service-title">Watertank Cleaning</div>
+            </div>
+            <div class="gohelp-service-item">
+                <img src="/images/scrap.jpg" alt="Scrap Collection" class="gohelp-service-image">
+                <div class="gohelp-service-title">Scrap Collection</div>
+            </div>
+        </div>
+    </section>
+</div>
+
+</section>
+<section  >
+  <div class="profile-section hidden">
+  <% for (let use of user){ %>
+    <%    if (use.username ===  username) { %>             
+     <li>
+       <img src="/images/userDefault.avif" alt="Default Profile" style="width: 150px; height: 150px;"> <%= username %>
+     </li>
+     <li><%= use.email %></li>
+     <li><a href="/login">Log Out</a></li>
+   <% } %>
+   <% } %>
+  </div>
 </section>
 
 
@@ -1489,7 +1819,7 @@
 
   
   <script>
-    const profileLink = document.getElementById('profileLink');
+    var profileLink = document.getElementById('profileLink');
     const dropdownMenu = document.getElementById('dropdownMenu');
 
     // Toggle dropdown on click
@@ -1621,23 +1951,57 @@ const acceptAgreementBtn = document.getElementById('accbtn');
         const copyright = document.querySelector('.copyright');
         const contactussection = document.querySelector('.contactus-section');
         const contactheight = document.querySelector('.contact-container');
+        const profilesection = document.querySelector('.profile-section');
+        const dropdownmenu = document.querySelector('.dropdown-menu');
+        const gohelpexplorebutton = document.querySelector('.gohelp-explore-button');
+        const gohelpviewmorelink = document.querySelector('.gohelp-view-more-link');
+        
         const mediaQuery = window.matchMedia('(max-width: 768px)');
+        // const profileLink = document.querySelector('#profileLink');
 
         if(window.matchMedia('(max-width: 768px)').matches){
+         hbtn.innerHTML='';
+         sbtn.innerHTML='';
+         orderBtn.innerHTML='';
+         profileLink.innerHTML='';
+          
+          
+         hbtn.classList.add('fa');
+          hbtn.classList.add('fa-home');
+          hbtn.classList.add('fa-2xl');
+          sbtn.classList.add('fa');
+          sbtn.classList.add('fa-handshake-o');
+          orderBtn.classList.add('fa');
+          orderBtn.classList.add('fa-shopping-cart');
+          profileLink.classList.add('fa');
+          profileLink.classList.add('fa-user');
           footersection.classList.add('hidden');
           copyright.classList.add('hidden');
-          homesection.click();
-
-          hbtn.addEventListener("click",function(){
-            // home.classList.remove('hidden');
-            contactussection.classList.add('hidden');
+          contactussection.classList.add('hidden');
     service.classList.add('hidden');
     provider.classList.add('hidden');
     about.classList.add('hidden');
     // lastdiv.classList.remove('height');
     order.classList.add('hidden');
     Aggrement.classList.add('hidden');
+   
+    contactheight.classList.add('heightt');
     homesection.classList.remove('hidden');
+   
+
+          hbtn.addEventListener("click",function(){
+             home.classList.add('hidden');
+            contactussection.classList.add('hidden');
+            
+    service.classList.add('hidden');
+    provider.classList.add('hidden');
+    about.classList.add('hidden');
+    // lastdiv.classList.remove('height');
+    // order.classList.add('hidden');
+    Aggrement.classList.add('hidden');
+    homesection.classList.remove('hidden');
+    contactheight.classList.add('heightt');
+    profilesection.classList.add('hidden');
    
           })
 
@@ -1649,10 +2013,70 @@ const acceptAgreementBtn = document.getElementById('accbtn');
     provider.classList.add('hidden');
     about.classList.add('hidden');
     // lastdiv.classList.remove('height');
+    // order.classList.add('hidden');
+    Aggrement.classList.add('hidden');
+    homesection.classList.add('hidden');
+    profilesection.classList.add('hidden');
+          })
+          orderBtn.addEventListener("click",function(){
+  
+
+
+  home.classList.add('hidden');
+            contactussection.classList.add('hidden');
+            contactheight.classList.add('heightt');
+    service.classList.add('hidden');
+    provider.classList.add('hidden');
+    about.classList.add('hidden');
+    // lastdiv.classList.remove('height');
+    // order.classList.add('hidden');
+    Aggrement.classList.add('hidden');
+    homesection.classList.add('hidden');
+    profilesection.classList.add('hidden');
+
+})
+profileLink.addEventListener('click', function() {
+      dropdownMenu.classList.add('doubletoph');
+  home.classList.add('hidden');
+            contactussection.classList.add('hidden');
+            contactheight.classList.add('heightt');
+    service.classList.add('hidden');
+    provider.classList.add('hidden');
+    about.classList.add('hidden');
+    // lastdiv.classList.remove('height');
     order.classList.add('hidden');
     Aggrement.classList.add('hidden');
     homesection.classList.add('hidden');
-          })
+    profilesection.classList.remove('hidden');
+    });      
+    
+    gohelpexplorebutton.addEventListener("click", function(){
+      home.classList.add('hidden');
+            contactussection.classList.add('hidden');
+            contactheight.classList.add('heightt');
+    service.classList.remove('hidden');
+    provider.classList.add('hidden');
+    about.classList.add('hidden');
+    // lastdiv.classList.remove('height');
+    order.classList.add('hidden');
+    Aggrement.classList.add('hidden');
+    homesection.classList.add('hidden');
+    profilesection.classList.add('hidden');
+    })
+
+    gohelpviewmorelink.addEventListener("click", function(){
+      homesection.classList.add('hidden');
+  home.classList.add('hidden');
+        contactussection.classList.add('hidden');
+        contactheight.classList.add('heightt');
+        service.classList.add('hidden');
+        provider.classList.add('hidden');
+        about.classList.add('hidden');
+        order.classList.remove('hidden'); // Show order
+        Aggrement.classList.add('hidden');
+        
+        profilesection.classList.add('hidden');
+    })
         }
 
   </script>

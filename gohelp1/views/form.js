@@ -19,7 +19,7 @@ const ProviderSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['ScrapCollection', 'BabySitting', 'HouseCleaning', 'WaterTankCleaning','HandyManservice'], 
+    enum: ['ScrapCollection', 'BabySitting', 'HouseCleaning', 'WaterTankCleaning','ElderlyCare','Electrical','Plumbing','Painting','ApplianceRepair','HomeRenovation','HomeSecuritySystem','GuardService','CateringService'] 
     },
   experience: {
     type: Number,

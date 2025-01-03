@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,16 +113,25 @@
   }
 </style>
 <body>
-
-
+  <!-- <% for(let provide of provides){ %>
+    <% if(provide.category == "BabySitting"){ %>
+      <img src="<%= provide.uploadimage.url %>" alt="">
+    <p><%= provide.fullname %></p>
+    <p><%= provide.city %></p>
+    <p><%= provide.contactnumber %></p>
+    <p><%= provide.experience %></p>
+    <p><%= provide.category %></p>
+    <%}%>
+   <% } %> -->
 
    <div class="header">
-    <h1>HouseCleaning Service Providers</h1>
+    <h1>ApplianceRepair Service Providers</h1>
 </div>
+
 
 <div class="providers-grid">
   <% for(let provide of provides){ %>
-      <% if(provide.category == "HouseCleaning"){ %>
+      <% if(provide.category == "ApplianceRepair"){ %>
           <div class="provider-card">
               <img class="profile-image" src="<%= provide.uploadimage.url %>" alt="Provider Profile">
               <h2 class="provider-name"><%= provide.fullname %></h2>

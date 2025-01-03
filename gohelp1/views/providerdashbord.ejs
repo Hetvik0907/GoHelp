@@ -440,6 +440,7 @@
             </div>
             <% for (let pro of provides) { %>
               <% if (pro.emailaddress === employmail) { %>
+                <%console.log(employmail)%>
             <div class="profile-section">
                 <img src="<%= pro.uploadimage?.url %>" class="profile-image" alt="">
                 <h3><%= pro.fullname %></h3>
@@ -588,24 +589,13 @@
                           <% let count = 1; %> <!-- Declare count outside the loop -->
                           <% for (let req of request) { %>
                             
-                            <% if (req.emailaddress === employmail) { %>
-                              <% 
-                                const now = new Date();
-                                const formattedTime = now.toLocaleString('en-GB', {
-                                  day: '2-digit',
-                                  month: '2-digit',
-                                  year: '2-digit',
-                                  hour: '2-digit',
-                                  minute: '2-digit',
-                                  hour12: true
-                                });
-                              %>
+                            <% if (req.emailaddress === employmail) { %> 
                               <tr>
                                 <td><%= count %></td>
                                 <td><%= req.usernames %></td>
                                 <td><%= req.userservice %></td>
                                 <td><%= req.usermobile %></td>
-                                <td><%= formattedTime %></td> <!-- Print formatted time -->
+                                <td><%= req.time %></td> <!-- Print formatted time -->
                                 <td><span class="status-badge accepted"><%= req.status %></span></td>
                               </tr>
                               <% count += 1; %> <!-- Increment count here -->
