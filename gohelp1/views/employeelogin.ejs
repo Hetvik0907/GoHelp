@@ -98,21 +98,28 @@
   @media (max-width: 768px) {
   .login-card {
     flex-direction: column;
-    position: absolute;
-    max-width: 350px;
-    right: 15px;
-    top: 70px;
+    position: relative; /* Change from absolute to relative */
+    max-width: 90%; /* Make the width dynamic for different screen sizes */
+    margin: 70px auto 0 auto; /* Center horizontally and adjust top spacing */
+    padding: 15px; /* Add some padding for better spacing */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
   }
 
   .login-image {
     order: -1;
     margin-bottom: 20px;
+    text-align: center; /* Center the image */
   }
 
   .login-image img {
-    max-width: 300px;
+    max-width: 90%; /* Dynamically adjust image size */
+    height: auto; /* Maintain aspect ratio */
+  }
+  .login-title{
+    font-size: 25px;
   }
 }
+
   
   img {
     border-radius:30px;
