@@ -171,3 +171,16 @@ Below are the visual outcomes of the GoHelp project:
 ![WhatsApp Image 2025-01-03 at 13 42 45_7e14ca54](https://github.com/user-attachments/assets/264936c4-782e-4167-8936-66933086baed)
 ![WhatsApp Image 2025-01-03 at 13 42 44_e109aff7](https://github.com/user-attachments/assets/e57667c5-69c0-4e41-ac55-7be2de51a4fe)
 
+## Team Contributions
+
+Our project is the result of collaborative efforts by the following team members:
+
+| Name              | Role                | 
+|-------------------|---------------------|
+| Meet Patel     | Front-End Developer     | 
+| Hetvik Patel         | Backend Developer   | 
+| Darshan Patel    | UI/UX Developer  | 
+| Daksh Patel        | Android app Developer         | 
+
+
+
