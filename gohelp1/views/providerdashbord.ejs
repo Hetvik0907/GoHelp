@@ -414,6 +414,10 @@
         .hidden {
     display: none; /* This ensures the element is removed from the layout */
 }
+.icon{
+        width: 17px;
+        height: 17px;
+}
 
     </style>
 </head>
@@ -422,7 +426,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="/placeholder.svg?height=40&width=120" alt="GoHelp Logo">
+                <!-- img src="/placeholder.svg?height=40&width=120" alt="GoHelp Logo"> -->
             </div>
             <% for (let pro of provides) { %>
               <% if (pro.emailaddress === employmail) { %>
@@ -437,19 +441,19 @@
             <nav>
                 <ul class="nav-menu">
                     <li class="nav-item active" data-section="dashboard">
-                        <span class="icon">□</span>
+                         <img class="icon" src="\images\dashboard.svg" alt=""> 
                         Dashboard
                     </li>
                     <li class="nav-item" data-section="profile">
-                        <span class="icon">○</span>
+                        <img class="icon" src="\images\profile.svg" alt=""> 
                         Profile
                     </li>
                     <li class="nav-item" data-section="history">
-                        <span class="icon">□</span>
+                        <img class="icon" src="\images\history.svg" alt=""> 
                         Service Order History
                     </li>
                     <li class="nav-item" data-section="support">
-                        <span class="icon">?</span>
+                        <img class="icon" src="\images\customer-care.svg" alt=""> 
                         Support & Help
                     </li>
                 </ul>
